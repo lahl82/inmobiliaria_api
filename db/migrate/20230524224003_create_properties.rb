@@ -1,18 +1,16 @@
 class CreateProperties < ActiveRecord::Migration[7.0]
   def change
     create_table :properties do |t|
-      # t.boolean :available, default: true
-      # t.boolean :suspended, default: false
-      # t.boolean :sold_in
-      # t.boolean :sold_out
       t.string :title, null: false
       t.text :description, null: false
       t.string :images, null: false
+      t.text :direction, null: false
       t.decimal :price, precision: 10, scale: 2, null: false
       t.float :area
+
       t.integer :mode
-      t.integer :type
-      t.integer :state
+      t.integer :type, null: false, default: 0
+      t.integer :state, default: 0
 
       t.integer :qty_bedroom
       t.integer :qty_bathroom
@@ -29,7 +27,7 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.boolean :social, default: false
 
       t.references :agent, null: false, foreign_key: true
-      t.references :residences, default: undefined
+      t.references :residences
       t.references :zones
 
       t.timestamps
