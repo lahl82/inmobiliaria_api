@@ -6,5 +6,7 @@ FactoryBot.define do
     address { Faker::Address.full_address }
     agency { Faker::Lorem.sentence(word_count: 3) }
     avatar { Faker::Avatar.image(size: '50x50') }
+
+    association :user
   end
 end

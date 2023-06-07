@@ -93,7 +93,7 @@ GEM
       i18n (>= 1.8.11, < 2)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    i18n (1.14.0)
+    i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
     irb (1.7.0)
@@ -177,6 +177,8 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.0)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -207,6 +209,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
   rspec-rails (~> 6.0, >= 6.0.3)
+  shoulda-matchers (~> 5.0)
   simplecov (~> 0.22.0)
   tzinfo-data
 
