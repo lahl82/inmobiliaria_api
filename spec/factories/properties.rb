@@ -23,5 +23,7 @@ FactoryBot.define do
     yard { Faker::Boolean.boolean }
     garden { Faker::Boolean.boolean }
     social { Faker::Boolean.boolean }
+
+    association :agent
   end
 end
