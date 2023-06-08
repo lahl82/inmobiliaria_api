@@ -7,7 +7,7 @@ FactoryBot.define do
     area  { Faker::Number.decimal(l_digits: 3, r_digits: 2).to_f }
 
     mode { Property.modes.keys.sample }
-    type { Property.types.keys.sample }
+    property_type { Property.property_types.keys.sample }
     state { Property.states.keys.sample }
 
     qty_bedroom { Faker::Number.between(from: 0, to: 30) }

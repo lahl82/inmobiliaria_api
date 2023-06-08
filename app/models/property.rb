@@ -1,7 +1,7 @@
 class Property < ApplicationRecord
   belongs_to :agent
 
-  enum type: { house: 0, apartment: 1, annex: 2, shop: 3, shed: 4 }
+  enum property_type: { house: 0, apartment: 1, annex: 2, shop: 3, shed: 4 }
   enum state: { available: 0, suspended: 1, sold_in: 2, sold_out: 3 }
   enum mode: { sale: 0, rent: 1 }
 
@@ -32,22 +32,22 @@ class Property < ApplicationRecord
   private
 
   def type_house?
-    type == :house
+    property_type == :house
   end
 
   def type_apartament?
-    type == :apartment
+    property_type == :apartment
   end
 
   def type_annex?
-    type == :annex
+    property_type == :annex
   end
 
   def type_shop?
-    type == :shop
+    property_type == :shop
   end
 
   def type_shed?
-    type == :shed
+    property_type == :shed
   end
 end
