@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_181134) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_08_142743) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_181134) do
     t.integer "qty_kitchen"
     t.integer "qty_parking"
     t.integer "qty_hall"
-    t.boolean "private"
+    t.boolean "is_private"
     t.boolean "office", default: false
     t.boolean "shop", default: false
     t.boolean "yard", default: false

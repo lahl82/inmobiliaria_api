@@ -6,18 +6,18 @@ FactoryBot.define do
     price { Faker::Commerce.price(range: 1000.0..10_000_000.0) }
     area  { Faker::Number.decimal(l_digits: 3, r_digits: 2).to_f }
 
-    mode { rand(0..1).round }
-    type { rand(0..4).round }
-    state { rand(0..3).round }
+    mode { Property.modes.keys.sample }
+    type { Property.types.keys.sample }
+    state { Property.states.keys.sample }
 
-    qty_bedroom { rand(0..30).round }
-    qty_bathroom { rand(0..30).round }
-    qty_floor { rand(0..30).round }
-    qty_kitchen { rand(0..10).round }
-    qty_parking { rand(0..30).round }
-    qty_hall { rand(0..10).round }
+    qty_bedroom { Faker::Number.between(from: 0, to: 30) }
+    qty_bathroom { Faker::Number.between(from: 0, to: 30) }
+    qty_floor { Faker::Number.between(from: 0, to: 30) }
+    qty_kitchen { Faker::Number.between(from: 0, to: 10) }
+    qty_parking { Faker::Number.between(from: 0, to: 30) }
+    qty_hall { Faker::Number.between(from: 0, to: 10) }
 
-    send(:private) { Faker::Boolean.boolean }
+    is_private { Faker::Boolean.boolean }
     office { Faker::Boolean.boolean }
     shop { Faker::Boolean.boolean }
     yard { Faker::Boolean.boolean }
