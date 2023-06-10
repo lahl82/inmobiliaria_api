@@ -27,13 +27,11 @@ RSpec.describe Property, type: :model do
 
     context 'when type is house' do
       before { subject.property_type = :house }
+      before { subject.is_private = nil }
 
-      it 'asdasd' do
-        property = build(:property, property_type: :house, is_private: nil)
-        expect(property).to be_invalid
-      end
+      byebug
 
-      it { should validate_presence_of(:is_private) }
+      it { should validate_inclusion_of(:is_private).in_array([true, false]) }
       it { should validate_presence_of(:qty_bathroom) }
       it { should validate_presence_of(:qty_bedroom) }
       it { should validate_presence_of(:qty_parking) }
