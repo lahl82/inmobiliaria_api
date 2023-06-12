@@ -25,11 +25,26 @@ RSpec.describe Property, type: :model do
     it { should validate_numericality_of(:qty_parking).only_integer.is_greater_than_or_equal_to(0) }
     it { should validate_numericality_of(:qty_hall).only_integer.is_greater_than_or_equal_to(0) }
 
+    describe 'conditional validations' do
+      context 'when type is house' do
+        subject { build(:property, :type_house) }
+
+        it 'should be valid with all the required attributes' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context 'when type is apartment or annex' do
+        subject { build(:property, :type_apartament_or_annex) }
+        it 'should be valid with all the required attributes' do
+          expect(subject).to be_valid
+        end
+      end
+    end
+
     context 'when type is house' do
       before { subject.property_type = :house }
       before { subject.is_private = nil }
-
-      byebug
 
       it { should validate_inclusion_of(:is_private).in_array([true, false]) }
       it { should validate_presence_of(:qty_bathroom) }

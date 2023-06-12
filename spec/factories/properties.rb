@@ -8,10 +8,11 @@ FactoryBot.define do
     price { Faker::Commerce.price(range: 1000.0..10_000_000.0) }
     area  { Faker::Number.decimal(l_digits: 3, r_digits: 2).to_f }
     mode { Property.modes.keys.sample }
-    property_type { Property.property_types.keys.sample }
+
     state { Property.states.keys.sample }
 
     trait :type_house do
+      property_type { 0 }
       is_private { Faker::Boolean.boolean }
       qty_bedroom { Faker::Number.between(from: 0, to: 30) }
       qty_bathroom { Faker::Number.between(from: 0, to: 30) }
@@ -27,6 +28,7 @@ FactoryBot.define do
     end
 
     trait :type_apartament_or_annex do
+      property_type { Faker::Number.between(from: 1, to: 2) }
       is_private { Faker::Boolean.boolean }
       qty_bedroom { Faker::Number.between(from: 0, to: 30) }
       qty_bathroom { Faker::Number.between(from: 0, to: 30) }
@@ -38,6 +40,7 @@ FactoryBot.define do
     end
 
     trait :type_shop do
+      property_type { 3 }
       is_private { Faker::Boolean.boolean }
       qty_bathroom { Faker::Number.between(from: 0, to: 30) }
       qty_floor { Faker::Number.between(from: 0, to: 30) }
@@ -45,6 +48,7 @@ FactoryBot.define do
     end
 
     trait :type_shed do
+      property_type { 4 }
       is_private { Faker::Boolean.boolean }
       qty_bathroom { Faker::Number.between(from: 0, to: 30) }
       qty_floor { Faker::Number.between(from: 0, to: 30) }
