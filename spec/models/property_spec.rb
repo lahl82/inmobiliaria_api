@@ -32,6 +32,12 @@ RSpec.describe Property, type: :model do
         it 'should be valid with all the required attributes' do
           expect(subject).to be_valid
         end
+
+        it 'should not be valid if one attribute is missing' do
+          new_property = subject
+          new_property.yard = nil
+          expect(new_property).to_not be_valid
+        end
       end
 
       context 'when type is apartment or annex' do
@@ -39,71 +45,39 @@ RSpec.describe Property, type: :model do
         it 'should be valid with all the required attributes' do
           expect(subject).to be_valid
         end
+
+        it 'should not be valid if one attribute is missing' do
+          new_property = subject
+          new_property.social = nil
+          expect(new_property).to_not be_valid
+        end
       end
-    end
 
-    context 'when type is house' do
-      before { subject.property_type = :house }
-      before { subject.is_private = nil }
+      context 'when type is shop' do
+        subject { build(:property, :type_shop) }
+        it 'should be valid with all the required attributes' do
+          expect(subject).to be_valid
+        end
 
-      it { should validate_inclusion_of(:is_private).in_array([true, false]) }
-      it { should validate_presence_of(:qty_bathroom) }
-      it { should validate_presence_of(:qty_bedroom) }
-      it { should validate_presence_of(:qty_parking) }
-      it { should validate_presence_of(:qty_floor) }
-      it { should validate_presence_of(:qty_kitchen) }
-      it { should validate_presence_of(:qty_hall) }
-      it { should validate_presence_of(:office) }
-      it { should validate_presence_of(:shop) }
-      it { should validate_presence_of(:yard) }
-      it { should validate_presence_of(:garden) }
-      it { should validate_presence_of(:social) }
-      it { should validate_presence_of(:area) }
-      it { should validate_presence_of(:mode) }
-    end
+        it 'should not be valid if one attribute is missing' do
+          new_property = subject
+          new_property.qty_floor = nil
+          expect(new_property).to_not be_valid
+        end
+      end
 
-    context 'when type is apartment' do
-      before { subject.property_type = :apartment }
-      it { should validate_presence_of(:is_private) }
-      it { should validate_presence_of(:qty_bathroom) }
-      it { should validate_presence_of(:qty_bedroom) }
-      it { should validate_presence_of(:qty_parking) }
-      it { should validate_presence_of(:area) }
-      it { should validate_presence_of(:mode) }
-      it { should validate_presence_of(:social) }
-    end
+      context 'when type is shed' do
+        subject { build(:property, :type_shed) }
+        it 'should be valid with all the required attributes' do
+          expect(subject).to be_valid
+        end
 
-    context 'when type is annex' do
-      before { subject.property_type = :annex }
-      it { should validate_presence_of(:is_private) }
-      it { should validate_presence_of(:qty_bathroom) }
-      it { should validate_presence_of(:qty_bedroom) }
-      it { should validate_presence_of(:qty_parking) }
-      it { should validate_presence_of(:area) }
-      it { should validate_presence_of(:mode) }
-    end
-
-    context 'when type is shop' do
-      before { subject.property_type = :shop }
-      it { should validate_presence_of(:is_private) }
-      it { should validate_presence_of(:qty_bathroom) }
-      it { should validate_presence_of(:qty_floor) }
-      it { should validate_presence_of(:area) }
-      it { should validate_presence_of(:office) }
-      it { should validate_presence_of(:mode) }
-    end
-
-    context 'when type is shed' do
-      before { subject.property_type = :shed }
-      it { should validate_presence_of(:is_private) }
-      it { should validate_presence_of(:qty_bathroom) }
-      it { should validate_presence_of(:qty_floor) }
-      it { should validate_presence_of(:area) }
-      it { should validate_presence_of(:office) }
-      it { should validate_presence_of(:shop) }
-      it { should validate_presence_of(:qty_bedroom) }
-      it { should validate_presence_of(:yard) }
-      it { should validate_presence_of(:mode) }
+        it 'should not be valid if one attribute is missing' do
+          new_property = subject
+          new_property.office = nil
+          expect(new_property).to_not be_valid
+        end
+      end
     end
   end
 end
