@@ -1,9 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe City, type: :model do
-  it 'City factory must be valid' do
+  it 'Factory must be valid' do
     city = build(:city)
     expect(city).to be_valid
+  end
+
+  describe 'Associations' do
+    it { should have_many(:zones) }
   end
 
   describe 'validations' do

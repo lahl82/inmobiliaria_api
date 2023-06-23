@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_08_204319) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_22_234937) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -105,10 +105,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_204319) do
 
   create_table "zones", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "cities_id", null: false
+    t.bigint "city_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cities_id"], name: "index_zones_on_cities_id"
+    t.index ["city_id"], name: "index_zones_on_city_id"
   end
 
   add_foreign_key "agents", "users"
@@ -117,5 +117,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_204319) do
   add_foreign_key "residences", "zones", column: "zones_id"
   add_foreign_key "visits", "clients"
   add_foreign_key "visits", "properties"
-  add_foreign_key "zones", "cities", column: "cities_id"
+  add_foreign_key "zones", "cities"
 end

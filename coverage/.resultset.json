@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/williamscch/Desktop/workspace/inmobiliaria_api/spec/models/city_spec.rb": {
+      "/home/williamscch/Desktop/workspace/inmobiliaria_api/spec/models/zone_spec.rb": {
         "lines": [
           1,
           null,
@@ -12,9 +12,13 @@
           null,
           null,
           1,
-          6,
-          null,
           2,
+          2,
+          null,
+          null,
+          1,
+          5,
+          null,
           2,
           2,
           2,
@@ -292,7 +296,7 @@
         "lines": [
           1,
           1,
-          7,
+          6,
           null,
           null
         ]
@@ -409,6 +413,8 @@
         "lines": [
           1,
           1,
+          6,
+          null,
           1,
           null,
           null
@@ -424,8 +430,9 @@
           null
         ]
       },
-      "/home/williamscch/Desktop/workspace/inmobiliaria_api/app/models/city.rb": {
+      "/home/williamscch/Desktop/workspace/inmobiliaria_api/app/models/zone.rb": {
         "lines": [
+          1,
           1,
           1,
           null,
@@ -439,8 +446,17 @@
           1,
           null
         ]
+      },
+      "/home/williamscch/Desktop/workspace/inmobiliaria_api/app/models/city.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1687389589
+    "timestamp": 1687478662
   }
 }
