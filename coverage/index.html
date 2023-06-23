@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-06-22T22:03:00-04:00">2023-06-22T22:03:00-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-06-22T22:18:14-04:00">2023-06-22T22:18:14-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  95.83%
+  96.27%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.09
+         1.44
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>216</b> relevant lines,
-    <span class="green"><b>207</b> lines covered</span> and
+    <b>241</b> relevant lines,
+    <span class="green"><b>232</b> lines covered</span> and
     <span class="red"><b>9</b> lines missed. </span>
     (<span class="green">
-  95.83%
+  96.27%
 </span>
 )
   </div>
@@ -128,11 +128,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#db31481d2df798f0ffac963e7e96d7ca7e5bfff9" class="src_link" title="app/models/visit.rb">app/models/visit.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">11</td>
-            <td class="cell--number">5</td>
-            <td class="cell--number">5</td>
+            <td class="cell--number">19</td>
+            <td class="cell--number">12</td>
+            <td class="cell--number">12</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.00</td>
+            <td class="cell--number">1.92</td>
             
           </tr>
         
@@ -231,7 +231,7 @@
             <td class="cell--number">9</td>
             <td class="cell--number">9</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.67</td>
+            <td class="cell--number">3.67</td>
             
           </tr>
         
@@ -253,7 +253,7 @@
             <td class="cell--number">7</td>
             <td class="cell--number">7</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.57</td>
+            <td class="cell--number">3.29</td>
             
           </tr>
         
@@ -264,7 +264,7 @@
             <td class="cell--number">48</td>
             <td class="cell--number">48</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.15</td>
+            <td class="cell--number">1.58</td>
             
           </tr>
         
@@ -286,14 +286,14 @@
             <td class="cell--number">6</td>
             <td class="cell--number">6</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">2.33</td>
+            <td class="cell--number">6.33</td>
             
           </tr>
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#7b6ce508cfa2061601b6964ac9da865715d15d1b" class="src_link" title="spec/factories/visits.rb">spec/factories/visits.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">10</td>
+            <td class="cell--number">9</td>
             <td class="cell--number">5</td>
             <td class="cell--number">5</td>
             <td class="cell--number">0</td>
@@ -315,11 +315,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#6bab58132c5781b7cdd3c0b9d52b014fae3e408a" class="src_link" title="spec/models/visit_spec.rb">spec/models/visit_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">43</td>
-            <td class="cell--number">9</td>
-            <td class="cell--number">9</td>
+            <td class="cell--number">44</td>
+            <td class="cell--number">27</td>
+            <td class="cell--number">27</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.22</td>
+            <td class="cell--number">1.11</td>
             
           </tr>
         
@@ -1719,8 +1719,8 @@
     
 
     <div class="t-line-summary">
-      <b>5</b> relevant lines.
-      <span class="green"><b>5</b> lines covered</span> and
+      <b>12</b> relevant lines.
+      <span class="green"><b>12</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -1760,7 +1760,7 @@
 
             
 
-            <code class="ruby">#   has_one :agent</code>
+            <code class="ruby">  #   has_one :agent</code>
           </li>
         </div>
       
@@ -1809,40 +1809,128 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="8">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="8">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">#   validates :date,</code>
+            
+
+            <code class="ruby">  validates :date,</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="9">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="9">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">#             inclusion: { in: (Date.current..Date.current + 30.days), message: &#39;should be within the next 30 days&#39; }</code>
+            
+
+            <code class="ruby">            inclusion: { in: (Date.current..Date.current + 30.days), message: &#39;should be within the next 30 days&#39; }</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="10">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="10">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">#   validates :date, date: { after: proc { Date.current }, message: &#39;should be a future date&#39; }</code>
+            
+
+            <code class="ruby">  validate :date_should_be_future</code>
           </li>
         </div>
       
         <div>
           <li class="never" data-hits="" data-linenumber="11">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="12">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="13">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="14">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def date_should_be_future</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="10" data-linenumber="15">
+            <span class="hits">10</span>
+            
+
+            
+
+            <code class="ruby">    return unless date.present? &amp;&amp; date &lt;= Date.current</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="16">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="3" data-linenumber="17">
+            <span class="hits">3</span>
+            
+
+            
+
+            <code class="ruby">    errors.add(:date, &#39;should be a future date&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="18">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="19">
             
             
 
@@ -3738,8 +3826,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="3">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="3">
+            <span class="hits">5</span>
             
 
             
@@ -3749,8 +3837,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="4">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="4">
+            <span class="hits">5</span>
             
 
             
@@ -3760,8 +3848,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="5">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="5">
+            <span class="hits">5</span>
             
 
             
@@ -3771,8 +3859,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="6">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="6">
+            <span class="hits">5</span>
             
 
             
@@ -3782,8 +3870,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="7">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="7">
+            <span class="hits">5</span>
             
 
             
@@ -3793,8 +3881,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="8">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="8">
+            <span class="hits">5</span>
             
 
             
@@ -3987,8 +4075,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="3">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="3">
+            <span class="hits">5</span>
             
 
             
@@ -3998,8 +4086,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="4">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="4">
+            <span class="hits">5</span>
             
 
             
@@ -4009,8 +4097,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="5">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="5">
+            <span class="hits">5</span>
             
 
             
@@ -4020,8 +4108,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="6">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="6">
+            <span class="hits">5</span>
             
 
             
@@ -4150,8 +4238,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="5">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="5">
+            <span class="hits">5</span>
             
 
             
@@ -4161,8 +4249,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="6">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="6">
+            <span class="hits">5</span>
             
 
             
@@ -4172,8 +4260,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="7">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="7">
+            <span class="hits">5</span>
             
 
             
@@ -4183,8 +4271,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="8">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="8">
+            <span class="hits">5</span>
             
 
             
@@ -4194,8 +4282,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="9">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="9">
+            <span class="hits">5</span>
             
 
             
@@ -4205,8 +4293,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="10">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="10">
+            <span class="hits">5</span>
             
 
             
@@ -4227,8 +4315,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="12">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="5" data-linenumber="12">
+            <span class="hits">5</span>
             
 
             
@@ -4927,8 +5015,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="3">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="9" data-linenumber="3">
+            <span class="hits">9</span>
             
 
             
@@ -4938,8 +5026,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="4">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="9" data-linenumber="4">
+            <span class="hits">9</span>
             
 
             
@@ -4949,8 +5037,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="5">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="9" data-linenumber="5">
+            <span class="hits">9</span>
             
 
             
@@ -4960,8 +5048,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="6">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="9" data-linenumber="6">
+            <span class="hits">9</span>
             
 
             
@@ -5046,18 +5134,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="3">
-            
-            
-
-            
-
-            <code class="ruby">    # date { &#39;2023-07-30&#39;.strftime(&quot;%Y-%m-%d&quot;) }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="4">
+          <li class="covered" data-hits="2" data-linenumber="3">
             <span class="hits">2</span>
             
 
@@ -5068,7 +5145,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="5">
+          <li class="never" data-hits="" data-linenumber="4">
             
             
 
@@ -5079,7 +5156,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="6">
+          <li class="covered" data-hits="1" data-linenumber="5">
             <span class="hits">1</span>
             
 
@@ -5090,7 +5167,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="7">
+          <li class="never" data-hits="" data-linenumber="6">
             
             
 
@@ -5101,7 +5178,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="8">
+          <li class="covered" data-hits="1" data-linenumber="7">
             <span class="hits">1</span>
             
 
@@ -5112,7 +5189,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="9">
+          <li class="never" data-hits="" data-linenumber="8">
             
             
 
@@ -5123,7 +5200,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="10">
+          <li class="never" data-hits="" data-linenumber="9">
             
             
 
@@ -5260,8 +5337,8 @@
     
 
     <div class="t-line-summary">
-      <b>9</b> relevant lines.
-      <span class="green"><b>9</b> lines covered</span> and
+      <b>27</b> relevant lines.
+      <span class="green"><b>27</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -5306,24 +5383,24 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="4">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="4">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  # describe &#39;validations&#39; do</code>
+            
+
+            <code class="ruby">  describe &#39;validations&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="5">
-            
-            
-
+          <li class="covered" data-hits="2" data-linenumber="5">
+            <span class="hits">2</span>
             
 
-            <code class="ruby">  #   it { should validate_presence_of(:date) }</code>
+            
+
+            <code class="ruby">    it { should validate_presence_of(:date) }</code>
           </li>
         </div>
       
@@ -5339,35 +5416,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="7">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="7">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #   it &#39;validates the format of date&#39; do</code>
+            
+
+            <code class="ruby">    it &#39;validates the format of date&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="8">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="8">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #     visit = FactoryBot.build(:visit, date: &#39;2023-06-22&#39;)</code>
+            
+
+            <code class="ruby">      visit = build(:visit, date: &#39;22/06/2023&#39;) # Invalid format</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="9">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="9">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #     expect(visit).to be_valid</code>
+            
+
+            <code class="ruby">      expect(visit).not_to be_valid</code>
           </li>
         </div>
       
@@ -5378,7 +5455,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -5389,40 +5466,40 @@
 
             
 
-            <code class="ruby">  #     visit.date = &#39;22/06/2023&#39; # Invalid format</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="12">
-            
-            
-
-            
-
-            <code class="ruby">  #     expect(visit).not_to be_valid</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="13">
-            
-            
-
-            
-
-            <code class="ruby">  #   end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="14">
-            
-            
-
-            
-
             <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="12">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;validates the inclusion of date within a range&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="13">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      visit = build(:visit, date: Date.current + 15.days)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="14">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(visit).to be_valid</code>
           </li>
         </div>
       
@@ -5433,29 +5510,29 @@
 
             
 
-            <code class="ruby">  #   it &#39;validates the inclusion of date within a range&#39; do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="16">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="16">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #     visit = FactoryBot.build(:visit, date: Date.current + 15.days)</code>
+            
+
+            <code class="ruby">      visit.date = Date.current - 1.day # Outside the range</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="17">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="17">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #     expect(visit).to be_valid</code>
+            
+
+            <code class="ruby">      expect(visit).not_to be_valid</code>
           </li>
         </div>
       
@@ -5471,24 +5548,24 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="19">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="19">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #     visit.date = Date.current - 1.day # Outside the range</code>
+            
+
+            <code class="ruby">      visit.date = Date.current + 35.day # Outside the range</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="20">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="20">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #     expect(visit).not_to be_valid</code>
+            
+
+            <code class="ruby">      expect(visit).not_to be_valid</code>
           </li>
         </div>
       
@@ -5499,7 +5576,7 @@
 
             
 
-            <code class="ruby">  #   end</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -5515,35 +5592,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="23">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="23">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #   it &#39;validates that the date is a future date&#39; do</code>
+            
+
+            <code class="ruby">    it &quot;validates that the date is a future date&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="24">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="24">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #     visit = FactoryBot.build(:visit, date: Date.current + 1.day)</code>
+            
+
+            <code class="ruby">      visit = build(:visit, date: Date.current + 1.day)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="25">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="25">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #     expect(visit).to be_valid</code>
+            
+
+            <code class="ruby">      expect(visit).to be_valid</code>
           </li>
         </div>
       
@@ -5559,35 +5636,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="27">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="27">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #     visit.date = Date.current # Not a future date</code>
+            
+
+            <code class="ruby">      visit.date = Date.current</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="28">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="28">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #     expect(visit).not_to be_valid</code>
+            
+
+            <code class="ruby">      expect(visit).not_to be_valid</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="29">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="29">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  #   end</code>
+            
+
+            <code class="ruby">      expect(visit.errors[:date]).to include(&quot;should be a future date&quot;)</code>
           </li>
         </div>
       
@@ -5598,7 +5675,7 @@
 
             
 
-            <code class="ruby">  # end</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -5609,12 +5686,23 @@
 
             
 
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="32">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="32">
+          <li class="covered" data-hits="1" data-linenumber="33">
             <span class="hits">1</span>
             
 
@@ -5625,7 +5713,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="33">
+          <li class="covered" data-hits="2" data-linenumber="34">
             <span class="hits">2</span>
             
 
@@ -5636,7 +5724,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="34">
+          <li class="covered" data-hits="2" data-linenumber="35">
             <span class="hits">2</span>
             
 
@@ -5647,7 +5735,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="35">
+          <li class="never" data-hits="" data-linenumber="36">
             
             
 
@@ -5658,7 +5746,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="36">
+          <li class="never" data-hits="" data-linenumber="37">
             
             
 
@@ -5669,7 +5757,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="37">
+          <li class="covered" data-hits="1" data-linenumber="38">
             <span class="hits">1</span>
             
 
@@ -5680,7 +5768,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="38">
+          <li class="covered" data-hits="1" data-linenumber="39">
             <span class="hits">1</span>
             
 
@@ -5691,7 +5779,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="39">
+          <li class="covered" data-hits="1" data-linenumber="40">
             <span class="hits">1</span>
             
 
@@ -5702,7 +5790,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="40">
+          <li class="covered" data-hits="1" data-linenumber="41">
             <span class="hits">1</span>
             
 
@@ -5713,7 +5801,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="41">
+          <li class="never" data-hits="" data-linenumber="42">
             
             
 
@@ -5724,7 +5812,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="42">
+          <li class="never" data-hits="" data-linenumber="43">
             
             
 
@@ -5735,7 +5823,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="43">
+          <li class="never" data-hits="" data-linenumber="44">
             
             
 
