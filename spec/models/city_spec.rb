@@ -7,6 +7,8 @@ RSpec.describe City, type: :model do
   end
 
   describe 'Associations' do
+    subject { build(:city) }
+
     it { should have_many(:zones) }
   end
 

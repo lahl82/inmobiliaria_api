@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_22_234937) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_23_002131) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,10 +78,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_234937) do
 
   create_table "residences", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "zones_id", null: false
+    t.bigint "zone_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["zones_id"], name: "index_residences_on_zones_id"
+    t.index ["zone_id"], name: "index_residences_on_zone_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -114,7 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_234937) do
   add_foreign_key "agents", "users"
   add_foreign_key "clients", "users"
   add_foreign_key "properties", "agents"
-  add_foreign_key "residences", "zones", column: "zones_id"
+  add_foreign_key "residences", "zones"
   add_foreign_key "visits", "clients"
   add_foreign_key "visits", "properties"
   add_foreign_key "zones", "cities"
