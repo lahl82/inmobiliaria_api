@@ -7,6 +7,8 @@ gem 'devise', '~> 4.9', '>= 4.9.2'
 
 gem 'devise-jwt', '~> 0.11.0'
 
+gem 'jsonapi-serializer', '~> 2.2'
+
 gem 'dotenv-rails', groups: %i[development test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
