@@ -12,8 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         data: UserSerializer.new(@user).serializable_hash[:data][:attributes]
       }
     else
+      error_messages = resource.errors.messages.map { |field, messages| "#{field.capitalize} #{messages.join(', ')}" }
       render json: {
-        status: { message: "User couldn't be created successfully. #{current_user.errors.full_messages.to_sentence}" }
+        status: { message: "User couldn't be created successfully. #{error_messages.join(' and ')}" }
       }, status: :unprocessable_entity
     end
   end
