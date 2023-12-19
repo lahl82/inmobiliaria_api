@@ -10,118 +10,80 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_27_150401) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_05_149848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "agents", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "last_name", null: false
-    t.string "phone", null: false
-    t.text "address"
-    t.string "agency", null: false
-    t.string "avatar"
+  create_table "questions", force: :cascade do |t|
+    t.text "description", null: false
+    t.string "aasm_state"
     t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_agents_on_user_id"
+    t.bigint "service_id", null: false
+    t.index ["service_id"], name: "index_questions_on_service_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
-  create_table "cities", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "clients", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "last_name", null: false
-    t.text "address", null: false
-    t.string "phone", null: false
+  create_table "ratings", force: :cascade do |t|
+    t.text "description", null: false
+    t.string "aasm_state"
     t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_clients_on_user_id"
+    t.bigint "service_id", null: false
+    t.index ["service_id"], name: "index_ratings_on_service_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
-  create_table "properties", force: :cascade do |t|
+  create_table "requests", force: :cascade do |t|
+    t.datetime "date", null: false
+    t.string "aasm_state"
+    t.bigint "service_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["service_id"], name: "index_requests_on_service_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
+  end
+
+  create_table "service_types", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "services", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
     t.string "images", null: false
-    t.text "direction", null: false
     t.decimal "price", precision: 10, scale: 2, null: false
-    t.float "area"
-    t.integer "mode"
-    t.integer "property_type", default: 0, null: false
-    t.integer "state", default: 0
-    t.integer "qty_bedroom"
-    t.integer "qty_bathroom"
-    t.integer "qty_floor"
-    t.integer "qty_kitchen"
-    t.integer "qty_parking"
-    t.integer "qty_hall"
-    t.boolean "is_private"
-    t.boolean "office", default: false
-    t.boolean "shop", default: false
-    t.boolean "yard", default: false
-    t.boolean "garden", default: false
-    t.boolean "social", default: false
-    t.bigint "agent_id", null: false
-    t.bigint "residences_id"
-    t.bigint "zones_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_properties_on_agent_id"
-    t.index ["residences_id"], name: "index_properties_on_residences_id"
-    t.index ["zones_id"], name: "index_properties_on_zones_id"
-  end
-
-  create_table "residences", force: :cascade do |t|
-    t.string "name", null: false
-    t.bigint "zone_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["zone_id"], name: "index_residences_on_zone_id"
+    t.string "aasm_state"
+    t.bigint "service_type_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["service_type_id"], name: "index_services_on_service_type_id"
+    t.index ["user_id"], name: "index_services_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.integer "role", default: 2
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "role", default: 2
+    t.string "aasm_state"
+    t.string "name", null: false
+    t.string "last_name", null: false
+    t.text "address", null: false
+    t.string "phone", null: false
+    t.string "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "jti", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "visits", force: :cascade do |t|
-    t.date "date", null: false
-    t.bigint "property_id", null: false
-    t.bigint "client_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["client_id"], name: "index_visits_on_client_id"
-    t.index ["property_id"], name: "index_visits_on_property_id"
-  end
-
-  create_table "zones", force: :cascade do |t|
-    t.string "name", null: false
-    t.bigint "city_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["city_id"], name: "index_zones_on_city_id"
-  end
-
-  add_foreign_key "agents", "users"
-  add_foreign_key "clients", "users"
-  add_foreign_key "properties", "agents"
-  add_foreign_key "residences", "zones"
-  add_foreign_key "visits", "clients"
-  add_foreign_key "visits", "properties"
-  add_foreign_key "zones", "cities"
+  add_foreign_key "questions", "services"
+  add_foreign_key "questions", "users"
+  add_foreign_key "ratings", "services"
+  add_foreign_key "ratings", "users"
+  add_foreign_key "requests", "services"
+  add_foreign_key "requests", "users"
+  add_foreign_key "services", "service_types"
+  add_foreign_key "services", "users"
 end

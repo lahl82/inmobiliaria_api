@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '4e9ed45aff3dedfb874697a4e56bc14fcd3f097626648a5b6aa143ae86d1efd86dff360b0688334a1a2ee2f9950de5d192bdd5460a1e1a1e73e058a99eceae21'
+  # config.secret_key = 'b0e3f45d52205ec2a99f516db726e44b7df7073eee76f98e179c46a1c794f00d0a3e9dce159f894fd943ba0014e83367394face35d478e66519d636aad28a9c9'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '4dd4b7547b43c2d7749900ad9dbfd4d501ef78f6d9b0fe7d1e85a6c009d4e66c2b8f9ce05141fda56336ab2a45ef856291f6668aa8da46772c10ced25855d23f'
+  # config.pepper = '0012f244f89ea8467105b826d1a569cc0d59805c88eeada732e7e06bef2da909df9cc44d27d009c219975c325ff5c9b55fd70b24affd1ff3446f7c1956086830'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -299,7 +299,7 @@ Devise.setup do |config|
   # ==> Hotwire/Turbo configuration
   # When using Devise with Hotwire/Turbo, the http status for error responses
   # and some redirects must match the following. The default in Devise for existing
-  # apps is `200 OK` and `302 Found respectively`, but new apps are generated with
+  # apps is `200 OK` and `302 Found` respectively, but new apps are generated with
   # these new defaults that match Hotwire/Turbo behavior.
   # Note: These might become the new default in future versions of Devise.
   config.responder.error_status = :unprocessable_entity
@@ -312,8 +312,8 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   config.jwt do |jwt|
-    # jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
     jwt.secret = Rails.application.credentials.devise_jwt_secret_key!
+
     jwt.dispatch_requests = [
       ['POST', %r{^/login$}]
     ]

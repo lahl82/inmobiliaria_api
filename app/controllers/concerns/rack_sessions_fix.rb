@@ -1,16 +1,23 @@
-module RackSessionFix
+# typed: strict
+# frozen_string_literal: true
+
+module RackSessionsFix
   extend ActiveSupport::Concern
+
   class FakeRackSession < Hash
     def enabled?
       false
     end
+
+    def destroy; end
   end
+
   included do
-    before_action :set_fake_rack_session_for_devise
+    before_action :set_fake_session
 
     private
 
-    def set_fake_rack_session_for_devise
+    def set_fake_session
       request.env['rack.session'] ||= FakeRackSession.new
     end
   end
