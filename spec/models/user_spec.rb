@@ -6,6 +6,41 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
   end
 
+  describe 'associations' do
+    it { should have_many(:requests) }
+    it { should have_many(:questions) }
+    it { should have_many(:ratings) }
+  end
+
+  describe 'validations' do
+    subject(:user) { build(:user) }
+
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:phone) }
+
+    it { should validate_length_of(:name).is_at_least(2).is_at_most(50) }
+    it { should validate_length_of(:last_name).is_at_least(2).is_at_most(50) }
+    it { should validate_length_of(:phone).is_at_least(11).is_at_most(20) }
+
+    it { should allow_value('John').for(:name) }
+    it { should allow_value("O'Reilly").for(:name) }
+    it { should allow_value('John Doe').for(:name) }
+    it { should allow_value('Doe').for(:last_name) }
+    it { should allow_value('+1234567890').for(:phone) }
+    it { should allow_value('123-456-7890').for(:phone) }
+    it { should allow_value('(123)456-7890').for(:phone) }
+    it { should allow_value('123 456 7890').for(:phone) }
+
+    it { should_not allow_value('').for(:name) }
+    it { should_not allow_value('J').for(:name) }
+    it { should_not allow_value('John@Doe').for(:name) }
+    it { should_not allow_value('D').for(:last_name) }
+    it { should_not allow_value('1234567890').for(:phone) }
+    it { should_not allow_value('12345678').for(:phone) }
+    it { should_not allow_value('ABCDEF').for(:phone) }
+  end
+
   describe 'requiered fields' do
     it 'is invalid without email' do
       user = build(:user, email: nil)
@@ -37,16 +72,17 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Role validations' do
-    it 'is invalid if is not one of the accepted roles and is not a symbol of th enum
-    (client, agent, admin)' do
+    it 'is invalid if is not one of the accepted roles' do
       user = build(:user)
-      expect { user.role = 'super' }.to raise_error(ArgumentError, "'super' is not a valid role")
+      user.role = 'super'
+      expect { user.save! }.to raise_error(ActiveRecord::RecordInvalid,
+                                           'Validation failed: Role is not included in the list')
     end
 
-    it 'is valid with one of the accepted roles (agent)' do
+    it 'is valid with one of the accepted roles (seller)' do
       user = build(:user, role: 1)
-      expect(user.save).to be true
       expect(user).to be_valid
+      expect(user.save).to be true
     end
   end
 
