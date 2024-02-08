@@ -21,6 +21,13 @@ Rails.application.routes.draw do
 
 #   # Defines the root path route ("/")
 #   # root "articles#index"
+  resources :services
+  resources :service_types
+  resources :users do
+    member do
+      get :services
+    end
+  end
 end
 
 # Rails.application.routes.draw do
