@@ -3,13 +3,16 @@
 
 class Service < ApplicationRecord
   include AASM
+  include ActiveStorageSupport::SupportForBase64
 
   belongs_to :user
   belongs_to :service_type
 
-  has_many :requests
-  has_many :questions
-  has_many :ratings
+  has_many :requests, dependent: :destroy
+  has_many :questions, dependent: :destroy
+  has_many :ratings, dependent: :destroy
+
+  has_one_base64_attached :photo
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, presence: true, length: { maximum: 1000 }
