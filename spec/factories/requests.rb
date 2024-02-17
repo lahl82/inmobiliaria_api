@@ -5,7 +5,7 @@ FactoryBot.define do
   factory :request do
     date { Faker::Time.forward(days: 10) }
 
-    association :user
-    association :service
+    user
+    service
   end
 end

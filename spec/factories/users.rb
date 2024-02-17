@@ -3,7 +3,7 @@
 
 FactoryBot.define do
   factory :user do
-    name { Faker::Name.name.gsub('.', '') }
+    name { Faker::Name.name.delete('.') }
     last_name { Faker::Name.last_name }
     phone { Faker::PhoneNumber.cell_phone_in_e164 }
     address { Faker::Address.full_address }

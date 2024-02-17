@@ -4,7 +4,7 @@ FactoryBot.define do
     description { Faker::Lorem.sentence(word_count: 50) }
     price { Faker::Commerce.price(range: 1000.0..10_000_000.0) }
 
-    association :user
-    association :service_type
+    user
+    service_type
   end
 end

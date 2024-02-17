@@ -20,12 +20,12 @@ class User < ApplicationRecord
   NAME_REGEX = /\A([[[:alpha:]]-' ])*\z/
   PHONE_REGEX = /\A(((\(\d+\))|(\+))?([\d\-[[:space:]]]))+\z/
 
-  validates_presence_of :name, :last_name, :phone
+  validates :name, :last_name, :phone, presence: true
   validates :name, format: { with: NAME_REGEX }, length: { minimum: 2, maximum: 50 }
   validates :last_name, format: { with: NAME_REGEX }, length: { minimum: 2, maximum: 50 }
   validates :phone, format: { with: PHONE_REGEX }, length: { minimum: 11, maximum: 20 }
-  validates_presence_of :email, :password, :role
-  validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP
+  validates :email, :password, :role, presence: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { maximum: 72, minimum: 8 }, confirmation: true
 
   aasm no_direct_assignment: true, timestamps: true do

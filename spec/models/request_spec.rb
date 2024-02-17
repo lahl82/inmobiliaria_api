@@ -3,11 +3,11 @@
 
 require 'rails_helper'
 
-RSpec.describe Request, type: :model do
+RSpec.describe Request do
   describe 'validations' do
     subject { build(:request) }
 
-    it { should validate_presence_of(:date) }
+    it { is_expected.to validate_presence_of(:date) }
 
     it 'validates the format of date' do
       request = build(:request, date: 'hoy') # Invalid format
@@ -32,8 +32,8 @@ RSpec.describe Request, type: :model do
   end
 
   describe 'associations' do
-    it { should belong_to(:user) }
-    it { should belong_to(:service) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:service) }
   end
 
   describe 'factory' do
