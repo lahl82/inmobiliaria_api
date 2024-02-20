@@ -12,7 +12,7 @@ class Service < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :ratings, dependent: :destroy
 
-  has_one_base64_attached :photo
+  has_many_base64_attached :photos
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, presence: true, length: { maximum: 1000 }
