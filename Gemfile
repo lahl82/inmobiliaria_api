@@ -8,12 +8,13 @@ ruby '3.2.2'
 gem 'aasm'
 gem 'activestorage', '~> 7.1.0'
 gem 'active_storage_base64', '~> 3.0.0'
+gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'devise-jwt'
 gem 'dotenv-rails', groups: %i[development test]
 gem 'image_processing', '>= 1.12'
-gem 'jsonapi-serializer'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'pg'
 gem 'puma'
@@ -21,7 +22,7 @@ gem 'rack'
 gem 'rack-cors'
 gem 'rails', '~> 7.1.0'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-# gem "jbuilder"
+gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

@@ -82,6 +82,22 @@ GEM
       tzinfo (~> 2.0)
     ast (2.4.2)
     awesome_print (1.9.2)
+    aws-eventstream (1.3.0)
+    aws-partitions (1.894.0)
+    aws-sdk-core (3.191.3)
+      aws-eventstream (~> 1, >= 1.3.0)
+      aws-partitions (~> 1, >= 1.651.0)
+      aws-sigv4 (~> 1.8)
+      jmespath (~> 1, >= 1.6.1)
+    aws-sdk-kms (1.77.0)
+      aws-sdk-core (~> 3, >= 3.191.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.143.0)
+      aws-sdk-core (~> 3, >= 3.191.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.8)
+    aws-sigv4 (1.8.0)
+      aws-eventstream (~> 1, >= 1.0.2)
     backport (1.2.0)
     base64 (0.2.0)
     bcrypt (3.1.20)
@@ -150,9 +166,11 @@ GEM
       rdoc
       reline (>= 0.3.8)
     jaro_winkler (1.5.6)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
+    jmespath (1.6.2)
     json (2.7.1)
-    jsonapi-serializer (2.2.0)
-      activesupport (>= 4.2)
     jwt (2.7.1)
     kramdown (2.4.0)
       rexml
@@ -382,6 +400,7 @@ DEPENDENCIES
   active_storage_base64 (~> 3.0.0)
   activestorage (~> 7.1.0)
   awesome_print
+  aws-sdk-s3
   bootsnap
   byebug
   debug
@@ -391,7 +410,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   image_processing (>= 1.12)
-  jsonapi-serializer
+  jbuilder
   pg
   prettier
   puma
