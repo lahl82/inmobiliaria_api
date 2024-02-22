@@ -2,18 +2,20 @@
 # frozen_string_literal: true
 
 class ServicesController < ApplicationController
+  include ActiveStorage::SetCurrent
+
   ActionController::Parameters.action_on_unpermitted_parameters = false
 
   def index
-    services = Service.all
+    @services = Service.all
     # authorize services
-    render json: services
+    # render json: @services
   end
 
   def show
-    service = Service.find(params[:id])
+    @service = Service.find(params[:id])
     # authorize services
-    render json: service
+    # render json: { service:, url: service.photos.first.url }
   end
 
   def create
