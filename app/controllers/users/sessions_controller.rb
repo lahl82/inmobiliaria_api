@@ -8,10 +8,13 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(current_user, _opts = {})
-    render json:
-            { status: { code: 200, message: 'Logged in successfully' },
-              data: { user: UserSerializer.new(current_user).serializable_hash[:data][:attributes] } },
-           status: :ok
+    @user_session = current_user
+    # @token_session = request.env['warden-jwt_auth.token']
+    # byebug
+    # render json:
+    #         { status: { code: 200, message: 'Logged in successfully' },
+    #           data: { user: UserSerializer.new(current_user).serializable_hash[:data][:attributes] } },
+    #        status: :ok
   end
 
   def respond_to_on_destroy
@@ -45,6 +48,10 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   # def create
   #   super
+  #   byebug
+  #   @user = current_user
+  #   render json: { user: @user,
+  #                  token: @token }.to_json and return
   # end
 
   # DELETE /resource/sign_out

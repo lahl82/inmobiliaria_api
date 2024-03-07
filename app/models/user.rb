@@ -24,9 +24,7 @@ class User < ApplicationRecord
   validates :name, format: { with: NAME_REGEX }, length: { minimum: 2, maximum: 50 }
   validates :last_name, format: { with: NAME_REGEX }, length: { minimum: 2, maximum: 50 }
   validates :phone, format: { with: PHONE_REGEX }, length: { minimum: 11, maximum: 20 }
-  validates :email, :password, :role, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, length: { maximum: 72, minimum: 8 }, confirmation: true
+  validates :role, presence: true
 
   aasm no_direct_assignment: true, timestamps: true do
     state :created, initial: true

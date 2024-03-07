@@ -1,6 +1,6 @@
 # app/views/categories/show.json.jbuilder
-json.id @user.id
-json.email @user.email
-json.role @user.role
-json.created_at @user.created_at
-json.created_date @user.created_at&.strftime('%m/%d/%Y')
+json.id @user_session.id
+json.email @user_session.email
+json.role @user_session.role
+json.created_at @user_session.created_at
+json.created_date @user_session.created_at&.strftime('%m/%d/%Y')
