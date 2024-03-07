@@ -10,8 +10,11 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins '*'
 
     resource '*',
-             headers: :any,
+             headers: %w[Authorization],
              methods: %i[get post put patch delete options head],
-             expose: ['Authorization']
+             expose: %w[Authorization],
+             max_age: 86_400
   end
 end
+# expose: ['Authorization']
+# credentials: %i[Origin Content-Type Accept Authorization Token Auth-Token Email X-User-Token X-User-Email],
