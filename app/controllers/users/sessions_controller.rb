@@ -3,6 +3,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   include RackSessionsFix
+  rescue_from JWT::ExpiredSignature, with: :expired_signature
   respond_to :json
 
   private
@@ -20,8 +21,7 @@ class Users::SessionsController < Devise::SessionsController
   def respond_to_on_destroy
     return if request.headers['Authorization'].blank?
 
-    jwt_payload = JWT.decode(request.headers['Authorization'].split.last,
-                             Rails.application.credentials.devise_jwt_secret_key!).first
+    jwt_payload = JWT.decode(request.headers['Authorization'].split.last, Rails.application.credentials.devise_jwt_secret_key!).first
 
     current_user = User.find(jwt_payload['sub'])
 
@@ -36,6 +36,13 @@ class Users::SessionsController < Devise::SessionsController
         message: "Couldn't find an active session"
       }, status: :unauthorized
     end
+  end
+
+  def expired_signature
+    render json: {
+      status: 401,
+      message: "Couldn't find an active session"
+    }, status: :unauthorized
   end
 
   # before_action :configure_sign_in_params, only: [:create]
