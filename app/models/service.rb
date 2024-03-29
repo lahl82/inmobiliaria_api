@@ -46,4 +46,14 @@ class Service < ApplicationRecord
       transitions from: :suspended, to: :active
     end
   end
+
+  def main_photo
+    photos_blobs.detect do |blob|
+      blob.filename.to_s.split('-').length > 1
+    end
+  end
+
+  def all_url_photos
+    photos.map(&:url)
+  end
 end

@@ -7,7 +7,7 @@ class ServicesController < ApplicationController
   ActionController::Parameters.action_on_unpermitted_parameters = false
 
   def index
-    @services = Service.all
+    @services = Service.includes(:photos_blobs).all
     # authorize services
     # render json: @services
   end
@@ -31,7 +31,12 @@ class ServicesController < ApplicationController
   end
 
   def photos_array_to_hash
-    photos_params[:data].map { |image| { data: image } }
+    photos_params[:data].map.with_index do |image, idx|
+      filename = "#{(Time.now.to_f * 1000).to_i}#{idx}"
+      filename += '-main' if idx.zero?
+
+      { data: image, filename: }
+    end
   end
 
   def service_params
