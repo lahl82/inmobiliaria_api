@@ -4,6 +4,9 @@ FROM ruby:3.2.2
 # Instala dependencias del sistema
 RUN apt-get update -qq && apt-get install -y postgresql-client
 
+# Instala la versión correcta de Bundler
+RUN gem install bundler -v 2.5.6
+
 # Copia el script de espera
 COPY entrypoint.sh /usr/local/bin/
 
@@ -17,7 +20,7 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 
 # Instala las gemas necesarias
-RUN bundle install
+RUN bundle _2.5.6_ install
 
 # Copia el resto de la aplicación
 COPY . .

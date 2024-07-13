@@ -6,7 +6,7 @@ require 'active_storage/engine'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load
+Dotenv::Rails.load
 
 module InmobiliariaApi
   class Application < Rails::Application

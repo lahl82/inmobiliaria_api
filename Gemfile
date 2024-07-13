@@ -12,7 +12,8 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'devise-jwt'
-gem 'dotenv-rails', groups: %i[development test]
+gem 'dotenv-rails'
+
 gem 'image_processing', '>= 1.12'
 gem 'kaminari', '~> 1.2.0'
 
@@ -21,7 +22,7 @@ gem 'pg'
 gem 'puma'
 gem 'rack'
 gem 'rack-cors'
-gem 'rails', '~> 7.1.3'
+gem 'rails', '~> 7.1', '>= 7.1.3.4'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
