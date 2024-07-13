@@ -7,7 +7,7 @@ class ServicesController < ApplicationController
   ActionController::Parameters.action_on_unpermitted_parameters = false
 
   def index
-    @services = Service.includes(:photos_blobs).all
+    paginate_response
     # authorize services
     # render json: @services
   end
@@ -30,6 +30,25 @@ class ServicesController < ApplicationController
     end
   end
 
+  # rubocop: disable Metrics/AbcSize
+  def paginate_response
+    @current_page = pagination_params[:page] || 1
+    @per_page = pagination_params[:per_page] || 25
+    search_field = params[:search_field]
+
+    @services = Service.includes(:photos_blobs)
+
+    if search_field.present?
+      @services = @services.where(title: search_field)
+    end
+
+    @total = @services.page(@current_page).per(@per_page).total_pages
+
+    @current_page = @total if @current_page.to_i > @total
+    @services.order(:price).page(@current_page).per(@per_page)
+  end
+  # rubocop: enable Metrics/AbcSize
+
   def photos_array_to_hash
     photos_params[:data].map.with_index do |image, idx|
       filename = "#{(Time.now.to_f * 1000).to_i}#{idx}"
@@ -45,5 +64,9 @@ class ServicesController < ApplicationController
 
   def photos_params
     params.permit(data: [])
+  end
+
+  def pagination_params
+    params.permit(:page, :per_page)
   end
 end

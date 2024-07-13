@@ -14,6 +14,7 @@ gem 'devise'
 gem 'devise-jwt'
 gem 'dotenv-rails', groups: %i[development test]
 gem 'image_processing', '>= 1.12'
+gem 'kaminari', '~> 1.2.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'pg'

@@ -76,7 +76,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
   create_table "services", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.string "images"
     t.decimal "price", precision: 10, scale: 2, null: false
     t.string "aasm_state"
     t.bigint "service_type_id", null: false
