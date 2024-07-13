@@ -21,7 +21,7 @@ gem 'pg'
 gem 'puma'
 gem 'rack'
 gem 'rack-cors'
-gem 'rails', '~> 7.1.0'
+gem 'rails', '~> 7.1.3'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
