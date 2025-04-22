@@ -25,9 +25,11 @@ default: &default
 development:
   <<: *default
   database: inmobiliaria_api_development
-  username: <%= Rails.application.credentials.db[:username] %>
-  password: <%= Rails.application.credentials.db[:password] %>
-  host: db
+  username: <%= Rails.application.credentials.config[:db][:username] %>
+  password: <%= Rails.application.credentials.config[:db][:password] %>
+  host: localhost
+
+  # host: db-host  # nombre de host para usar con docker
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -61,8 +63,11 @@ test:
   <<: *default
   database: inmobiliaria_api_test
   username: <%= ENV.fetch("POSTGRES_USER") { 'postgres' } %>
-  password: <%= ENV.fetch("POSTGRES_USER") { 1234 } %>
-  host: db
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { 'postgres' } %>
+  host: localhost
+
+  # host: db-host  # nombre de host para usar con docker
+
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
@@ -86,6 +91,8 @@ test:
 production:
   <<: *default
   database: inmobiliaria_api_production
-  username: <%= Rails.application.credentials.db[:username] %>
-  password: <%= Rails.application.credentials.db[:password] %>
-  host: db
+  username: <%= Rails.application.credentials.config[:db][:username] %>
+  password: <%= Rails.application.credentials.config[:db][:password] %>
+  host: localhost
+
+  # host: db-host  # nombre de host para usar con docker
