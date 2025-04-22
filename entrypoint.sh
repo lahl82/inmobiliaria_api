@@ -4,8 +4,11 @@ set -e
 # Elimina el archivo PID del servidor si existe
 rm -f /app/tmp/pids/server.pid
 
+# Establece la contraseña para el usuario postgres desde la variable de entorno
+# export PGPASSWORD=${POSTGRES_PASSWORD}
+
 # Esperar a que la base de datos esté lista
-until pg_isready -h db -p 5432 -U postgres; do
+until pg_isready -h db-host -p 5432 -U postgres; do
   echo "Waiting for postgres..."
   sleep 2
 done
@@ -16,6 +19,7 @@ bundle exec rails db:create
 # Ejecutar migraciones y arrancar el servidor
 bundle exec rails db:migrate
 bundle exec rails server -b 0.0.0.0
+
 # #!/usr/bin/env bash
 # # wait-for-it.sh
 

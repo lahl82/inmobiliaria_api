@@ -2,7 +2,7 @@
 FROM ruby:3.2.2
 
 # Instala dependencias del sistema
-RUN apt-get update -qq && apt-get install -y postgresql-client
+RUN apt-get update -qq && apt-get install -y postgresql-client iputils-ping net-tools
 
 # Instala la versión correcta de Bundler
 RUN gem install bundler -v 2.5.6
@@ -30,7 +30,7 @@ COPY config/credentials /app/config/credentials
 COPY config/master.key /app/config/master.key
 
 # Ejecuta las migraciones de la base de datos y luego inicia el servidor
-# CMD ["wait-for-it.sh", "db:5432", "--", "sh", "-c", "bundle exec rails db:migrate && bundle exec rails server -b 0.0.0.0"]
+# CMD ["wait-for-it.sh", "db:5432", "--", "sh", "-c", "bundle exec rails db:migrate && bundle exec rails server -b 0.0.0>
 
 # Expone el puerto
 EXPOSE 3000
