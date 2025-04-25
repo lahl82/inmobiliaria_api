@@ -7,9 +7,12 @@ class CreateServices < ActiveRecord::Migration[7.0]
       t.string :title, null: false
       t.text :description, null: false
       t.decimal :price, precision: 10, scale: 2, null: false
-      t.string :aasm_state
+      t.string :state
+      t.datetime :state_changed_at
 
-      t.references :service_type, null: false, foreign_key: true, on_delete: :cascade
+      t.timestamps
+
+      t.references :service_type, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
     end
   end

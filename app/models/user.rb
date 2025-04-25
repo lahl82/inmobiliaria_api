@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :questions
   has_many :ratings
 
-  enum :role, %i[admin seller buyer], validate: true
+  enum :role, %i[admin seller customer], validate: true
 
   NAME_REGEX = /\A([[[:alpha:]]-' ])*\z/
   PHONE_REGEX = /\A(((\(\d+\))|(\+))?([\d\-[[:space:]]]))+\z/

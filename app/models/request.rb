@@ -2,17 +2,31 @@
 # frozen_string_literal: true
 
 class Request < ApplicationRecord
+  include AASM
+
   belongs_to :user
-  belongs_to :service
+  belongs_to :meeting
 
-  validates :date, presence: true
-  validate :date_should_be_future
+  has_many :ratings
+  has_many :notifications
 
-  private
-
-  def date_should_be_future
-    return if date.present? && date > Time.zone.now && date < 30.days.from_now
-
-    errors.add(:date, 'should be within the next 30 days')
+  aasm no_direct_assignment: true, timestamps: true do
+    state :active, initial: true
+    state :user_canceled
+    state :seller_canceled
+    state :missed
+  
+    event :cancel_by_user do
+      transitions from: :active, to: :user_canceled
+    end
+  
+    event :cancel_by_seller do
+      transitions from: :active, to: :seller_canceled
+    end
+  
+    event :mark_as_missed do
+      transitions from: :active, to: :missed
+    end
   end
+
 end

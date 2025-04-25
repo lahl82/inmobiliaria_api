@@ -8,10 +8,9 @@ class Service < ApplicationRecord
   belongs_to :user
   belongs_to :service_type
 
-  has_many :requests, dependent: :destroy
-  has_many :questions, dependent: :destroy
-  has_many :ratings, dependent: :destroy
-
+  has_many :meetings
+  has_many :questions
+  
   has_many_base64_attached :photos
 
   validates :title, presence: true, length: { maximum: 255 }

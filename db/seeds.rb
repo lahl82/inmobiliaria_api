@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+service_type_names = [
+  "Estética",
+  "Consultas médicas",
+  "Consultas veterinarias",
+  "Consultas odontológicas",
+  "Rehabilitación",
+  "Kinesiologia"
+]
+
+service_type_names.each do |name|
+  ServiceType.find_or_create_by!(name: name)
+end

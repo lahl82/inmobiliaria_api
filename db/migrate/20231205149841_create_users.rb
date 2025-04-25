@@ -34,12 +34,13 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       # t.datetime :locked_at
 
       t.integer :role, default: 2
-      t.string :aasm_state
+      t.string :state
       t.string :name, null: false
       t.string :last_name, null: false
       t.text :address, null: false
       t.string :phone, null: false
       t.string :avatar
+      t.datetime :state_changed_at
 
       t.timestamps null: false
     end

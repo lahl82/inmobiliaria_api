@@ -42,9 +42,36 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "meetings", force: :cascade do |t|
+    t.datetime "starting", null: false
+    t.integer "duration", null: false
+    t.integer "max_requests", default: 1, null: false
+    t.string "state", null: false
+    t.datetime "state_changed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "service_id", null: false
+    t.index ["service_id"], name: "index_meetings_on_service_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.text "description", null: false
+    t.datetime "sent_at", null: false
+    t.string "state", null: false
+    t.datetime "state_changed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "request_id", null: false
+    t.index ["request_id"], name: "index_notifications_on_request_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "description", null: false
-    t.string "aasm_state"
+    t.text "answer"
+    t.string "state"
+    t.datetime "state_changed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.bigint "service_id", null: false
     t.index ["service_id"], name: "index_questions_on_service_id"
@@ -53,31 +80,40 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
 
   create_table "ratings", force: :cascade do |t|
     t.text "description", null: false
-    t.string "aasm_state"
+    t.integer "score", null: false
+    t.string "state"
+    t.datetime "state_changed_at"
     t.bigint "user_id", null: false
-    t.bigint "service_id", null: false
-    t.index ["service_id"], name: "index_ratings_on_service_id"
+    t.bigint "request_id", null: false
+    t.index ["request_id"], name: "index_ratings_on_request_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "requests", force: :cascade do |t|
-    t.datetime "date", null: false
-    t.string "aasm_state"
-    t.bigint "service_id", null: false
+    t.string "state"
+    t.datetime "state_changed_at"
+    t.bigint "meeting_id", null: false
     t.bigint "user_id", null: false
-    t.index ["service_id"], name: "index_requests_on_service_id"
+    t.index ["meeting_id"], name: "index_requests_on_meeting_id"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "service_types", force: :cascade do |t|
     t.string "name", null: false
+    t.string "state"
+    t.datetime "state_changed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "services", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
     t.decimal "price", precision: 10, scale: 2, null: false
-    t.string "aasm_state"
+    t.string "state"
+    t.datetime "state_changed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "service_type_id", null: false
     t.bigint "user_id", null: false
     t.index ["service_type_id"], name: "index_services_on_service_type_id"
@@ -91,12 +127,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "role", default: 2
-    t.string "aasm_state"
+    t.string "state"
     t.string "name", null: false
     t.string "last_name", null: false
     t.text "address", null: false
     t.string "phone", null: false
     t.string "avatar"
+    t.datetime "state_changed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "jti", null: false
@@ -110,11 +147,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "meetings", "services"
+  add_foreign_key "notifications", "requests"
   add_foreign_key "questions", "services"
   add_foreign_key "questions", "users"
-  add_foreign_key "ratings", "services"
+  add_foreign_key "ratings", "requests"
   add_foreign_key "ratings", "users"
-  add_foreign_key "requests", "services"
+  add_foreign_key "requests", "meetings"
   add_foreign_key "requests", "users"
   add_foreign_key "services", "service_types"
   add_foreign_key "services", "users"
