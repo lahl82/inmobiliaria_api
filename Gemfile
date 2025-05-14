@@ -3,69 +3,71 @@
 
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
 ruby '3.2.2'
 
-gem 'aasm'
-gem 'activestorage', '~> 7.1.0'
-gem 'active_storage_base64', '~> 3.0.0'
-gem 'aws-sdk-s3', require: false
-gem 'bootsnap', require: false
-gem 'devise'
-gem 'devise-jwt'
-gem 'dotenv-rails'
+# Core Gems
+gem 'rails', '~> 7.1', '>= 7.1.5.1'
+gem 'pg', '~> 1.5'
+gem 'puma', '~> 6.6'
+gem 'rack', '~> 3.1'
+gem 'rack-cors', '~> 2.0'
 
-gem 'image_processing', '>= 1.12'
-gem 'kaminari', '~> 1.2.0'
+# State management
+gem 'aasm', '~> 5.5'
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'pg'
-gem 'puma'
-gem 'rack'
-gem 'rack-cors'
-gem 'rails', '~> 7.1', '>= 7.1.3.4'
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+# File Uploads
+gem 'activestorage', '~> 7.1.5'
+gem 'active_storage_base64', '~> 3.0'
+gem 'image_processing', '~> 1.14'
+gem 'aws-sdk-s3', '~> 1.183', require: false
 
-# Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
+# Background helpers and performance
+gem 'bootsnap', '~> 1.18', require: false
+gem 'dotenv-rails', '~> 3.1'
+gem 'kaminari', '~> 1.2'
 
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
+# Authentication and Authorization
+gem 'devise', '~> 4.9'
+gem 'devise-jwt', '~> 0.12'
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+# JSON Serialization
+gem 'blueprinter', '~> 1.1', '>= 1.1.2'
+# gem 'jbuilder' # Reemplazado por Blueprinter
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# Platform-specific dependency for Windows
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'awesome_print'                         # Pretty print your Ruby objects with indentation
-  gem 'byebug'
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'rspec-rails'
+  # Debugging & Testing Tools
+  gem 'awesome_print', '~> 1.9'
+  gem 'byebug', '~> 12.0'
+  gem 'debug', '~> 1.10', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails', '~> 6.4'
+  gem 'faker', '~> 3.5'
+  gem 'rspec-rails', '~> 7.1'
 end
 
 group :development do
-  gem 'prettier'                              # Linting tool specifically for line length warnings
-  gem 'ruby-lsp', require: false
-  gem 'ruby-lsp-rails', require: false
-  gem 'ruby-lsp-rspec', require: false
+  # Formatting & Style Tools
+  gem 'prettier', '~> 4.0' # Linter para longitudes de línea
+  gem 'solargraph', '~> 0.54'
 
-  gem 'rubocop'                               # Style Monitoring
-  gem 'rubocop-performance'                   # Performance Monitoring
-  gem 'rubocop-rails'                         # Rails Style Monitoring
-  gem 'rubocop-rspec'                         # Rspec Style Monitoring
-  gem 'solargraph'
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  # Ruby LSP (para editores compatibles con LSP como VSCode)
+  gem 'ruby-lsp', '~> 0.23', require: false
+  gem 'ruby-lsp-rails', '~> 0.4', require: false
+  gem 'ruby-lsp-rspec', '~> 0.1', require: false
+
+  # RuboCop (estilo y convenciones)
+  gem 'rubocop', '~> 1.75'
+  gem 'rubocop-performance', '~> 1.25'
+  gem 'rubocop-rails', '~> 2.31'
+  gem 'rubocop-rspec', '~> 3.6'
+
+  # gem 'spring' # Speed up boot time on some systems
 end
 
 group :test do
-  gem 'shoulda-matchers'
-  gem 'simplecov'
+  gem 'shoulda-matchers', '~> 6.4'
+  gem 'simplecov', '~> 0.22'
 end
