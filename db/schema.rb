@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "meetings", force: :cascade do |t|
+  create_table "appointment_slots", force: :cascade do |t|
     t.datetime "starting", null: false
     t.integer "duration", null: false
     t.integer "max_requests", default: 1, null: false
@@ -51,7 +51,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "service_id", null: false
-    t.index ["service_id"], name: "index_meetings_on_service_id"
+    t.index ["service_id"], name: "index_appointment_slots_on_service_id"
+  end
+
+  create_table "appointments", force: :cascade do |t|
+    t.string "state"
+    t.datetime "state_changed_at"
+    t.bigint "appointment_slot_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["appointment_slot_id"], name: "index_appointments_on_appointment_slot_id"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -61,8 +70,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
     t.datetime "state_changed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "request_id", null: false
-    t.index ["request_id"], name: "index_notifications_on_request_id"
+    t.bigint "appointment_id", null: false
+    t.index ["appointment_id"], name: "index_notifications_on_appointment_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -84,18 +93,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
     t.string "state"
     t.datetime "state_changed_at"
     t.bigint "user_id", null: false
-    t.bigint "request_id", null: false
-    t.index ["request_id"], name: "index_ratings_on_request_id"
+    t.bigint "appointment_id", null: false
+    t.index ["appointment_id"], name: "index_ratings_on_appointment_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"
-  end
-
-  create_table "requests", force: :cascade do |t|
-    t.string "state"
-    t.datetime "state_changed_at"
-    t.bigint "meeting_id", null: false
-    t.bigint "user_id", null: false
-    t.index ["meeting_id"], name: "index_requests_on_meeting_id"
-    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "service_types", force: :cascade do |t|
@@ -126,7 +126,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer "role", default: 2
+    t.integer "role_mask", default: 0
     t.string "state"
     t.string "name", null: false
     t.string "last_name", null: false
@@ -147,14 +147,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "meetings", "services"
-  add_foreign_key "notifications", "requests"
+  add_foreign_key "appointment_slots", "services"
+  add_foreign_key "appointments", "appointment_slots"
+  add_foreign_key "appointments", "users"
+  add_foreign_key "notifications", "appointments"
   add_foreign_key "questions", "services"
   add_foreign_key "questions", "users"
-  add_foreign_key "ratings", "requests"
+  add_foreign_key "ratings", "appointments"
   add_foreign_key "ratings", "users"
-  add_foreign_key "requests", "meetings"
-  add_foreign_key "requests", "users"
   add_foreign_key "services", "service_types"
   add_foreign_key "services", "users"
 end

@@ -5,19 +5,19 @@ class Service < ApplicationRecord
   include AASM
   include ActiveStorageSupport::SupportForBase64
 
-  belongs_to :user
+  belongs_to :seller, class_name: "User", foreign_key: "user_id"
   belongs_to :service_type
 
-  has_many :meetings
+  has_many :appointment_slots
   has_many :questions
   
   has_many_base64_attached :photos
 
-  validates :title, presence: true, length: { maximum: 255 }
+  validates :title, presence: true, length: { maximum: 255 }, name_format: true
   validates :description, presence: true, length: { maximum: 1000 }
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
-  aasm no_direct_assignment: true, timestamps: true do
+  aasm column: :state, no_direct_assignment: true, timestamps: true do
     state :created, initial: true
     state :rejected, :active, :disabled, :suspended
 

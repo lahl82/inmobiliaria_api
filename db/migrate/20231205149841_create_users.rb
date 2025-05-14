@@ -33,7 +33,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.integer :role, default: 2
+      t.integer :role_mask, default: 0
       t.string :state
       t.string :name, null: false
       t.string :last_name, null: false

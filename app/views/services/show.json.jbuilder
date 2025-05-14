@@ -1,4 +1,4 @@
-# app/views/categories/show.json.jbuilder
+# app/views/services/show.json.jbuilder
 json.id @service.id
 json.title @service.title
 json.description @service.description

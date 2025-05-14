@@ -5,12 +5,12 @@ class Rating < ApplicationRecord
   include AASM
 
   belongs_to :user
-  belongs_to :request
+  belongs_to :appointment
 
   validates :description, presence: true
   validates :score, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 6 }
 
-  aasm no_direct_assignment: true, timestamps: true do
+  aasm column: :state, no_direct_assignment: true, timestamps: true do
     state :visible, initial: true
     state :hidden
 

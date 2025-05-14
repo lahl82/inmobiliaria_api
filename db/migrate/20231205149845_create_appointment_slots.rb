@@ -1,9 +1,9 @@
 # typed: strict
 # frozen_string_literal: true
 
-class CreateMeetings < ActiveRecord::Migration[7.0]
+class CreateAppointmentSlots < ActiveRecord::Migration[7.0]
   def change
-    create_table :meetings do |t|
+    create_table :appointment_slots do |t|
       t.datetime :starting, null: false
       t.integer :duration, null: false # en minutos
       t.integer :max_requests, null: false, default: 1

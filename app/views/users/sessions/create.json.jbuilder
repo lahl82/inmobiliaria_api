@@ -1,4 +1,4 @@
-# app/views/categories/show.json.jbuilder
+# app/views/users/sessions/create.json.jbuilder
 json.id @user_session.id
 json.name @user_session.name
 json.last_name @user_session.last_name

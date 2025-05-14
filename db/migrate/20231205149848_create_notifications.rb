@@ -11,7 +11,7 @@ class CreateNotifications < ActiveRecord::Migration[7.0]
 
       t.timestamps
 
-      t.references :request, null: false, foreign_key: true
+      t.references :appointment, null: false, foreign_key: true
     end
   end
 end

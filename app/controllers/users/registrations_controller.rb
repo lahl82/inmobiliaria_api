@@ -52,6 +52,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render json: { status: { message: "User couldn't be created. #{error}" } },
              status: :unprocessable_entity
     end
+
+    # if resource.persisted?
+    #   render json: {
+    #     status: { success: true, message: "Usuario creado exitosamente" },
+    #     data: current_user.as_json(only: [:id, :email, :name, :last_name])
+    #   }, status: :created
+    # else
+    #   render json: {
+    #     status: { success: false, message: current_user.errors.full_messages.to_sentence },
+    #     errors: current_user.errors
+    #   }, status: :unprocessable_entity
+    # end
+
+
   end
 
   protected

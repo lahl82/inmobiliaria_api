@@ -10,7 +10,7 @@ class CreateRatings < ActiveRecord::Migration[7.0]
       t.datetime :state_changed_at
 
       t.references :user, null: false, foreign_key: true
-      t.references :request, null: false, foreign_key: true
+      t.references :appointment, null: false, foreign_key: true
     end
   end
 end

@@ -9,7 +9,7 @@ class Question < ApplicationRecord
 
   validates :description, presence: true
 
-  aasm no_direct_assignment: true, timestamps: true do
+  aasm column: :state, no_direct_assignment: true, timestamps: true do
     state :visible, initial: true
     state :hidden
 

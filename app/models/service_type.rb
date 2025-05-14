@@ -6,7 +6,7 @@ class ServiceType < ApplicationRecord
 
   has_many :services
 
-  validates :name, uniqueness: true, presence: true, length: { in: 3..100 }, format: { with: /\A[\p{L}\s]+\z/, message: 'solo permite letras y espacios' }
+  validates :name, uniqueness: true, presence: true, length: { in: 3..100 }, name_format: true
 
   aasm column: :state, no_direct_assignment: true, timestamps: true do
     state :active, initial: true

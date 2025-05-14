@@ -1,4 +1,4 @@
-# app/views/categories/index.json.jbuilder
+# app/views/services/index.json.jbuilder
 json.services do
   json.array! @services do |service|
     json.id service.id

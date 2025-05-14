@@ -1,16 +1,16 @@
 # typed: strict
 # frozen_string_literal: true
 
-class Meeting < ApplicationRecord
+class AppointmentSlot < ApplicationRecord
   include AASM
 
   belongs_to :service
-  has_many :requests
+  has_many :appointments
 
   validates :starting, presence: true
   validate :starting_should_be_future
-  
-  aasm no_direct_assignment: true, timestamps: true do
+
+  aasm column: :state, no_direct_assignment: true, timestamps: true do
     state :active, initial: true
     state :suspended
 
