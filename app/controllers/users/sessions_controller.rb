@@ -16,6 +16,7 @@ class Users::SessionsController < Devise::SessionsController
     #         { status: { code: 200, message: 'Logged in successfully' },
     #           data: { user: UserSerializer.new(current_user).serializable_hash[:data][:attributes] } },
     #        status: :ok
+    render json: UserSessionBlueprint.render_as_hash(@user_session, view: :login), status: :ok
   end
 
   def respond_to_on_destroy
@@ -26,23 +27,23 @@ class Users::SessionsController < Devise::SessionsController
     current_user = User.find(jwt_payload['sub'])
 
     if current_user
-      render json: {
-        status: 200,
-        message: 'Logged out successfully'
-      }, status: :ok
+      render_success(
+        message: "Desloggeado correctamente",
+        code: :ok,
+      )
     else
-      render json: {
-        status: 401,
-        message: "Couldn't find an active session"
-      }, status: :unauthorized
+      render_error(
+        message: "No puede encontrar la sesión",
+        code: :unauthorized
+      )
     end
   end
 
   def expired_signature
-    render json: {
-      status: 401,
-      message: "Couldn't find an active session"
-    }, status: :unauthorized
+    render_error(
+      message: "Token expirado",
+      code: :unauthorized
+    )
   end
 
   # before_action :configure_sign_in_params, only: [:create]

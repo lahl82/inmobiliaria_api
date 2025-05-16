@@ -47,10 +47,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def respond_with(current_user, _opts = {})
     if resource.persisted?
       @user_session = current_user
+      render json: UserSessionBlueprint.render_as_hash(@user_session, view: :default), status: :created
     else
-      error = current_user.errors.full_messages.to_sentence
-      render json: { status: { message: "User couldn't be created. #{error}" } },
-             status: :unprocessable_entity
+      render_error(
+        message: "No se pudo registrar el usuario",
+        code: :unprocessable_entity,
+        details: current_user.errors.full_messages
+      )
     end
 
     # if resource.persisted?
