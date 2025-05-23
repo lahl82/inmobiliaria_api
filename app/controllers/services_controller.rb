@@ -3,17 +3,22 @@
 
 class ServicesController < ApplicationController
   include ActiveStorage::SetCurrent
+  include PaginationParams
+  include CollectionPaginator
 
   ActionController::Parameters.action_on_unpermitted_parameters = false
 
   def index
     # authorize services
+
     result = paginate_collection(
       Service.includes(:photos_blobs),
       order_by: :price,
       search_column: :title,
-      search_value: params[:search_value]
-      )
+      search_value: search_value_param,
+      page: page_param,
+      per_page: per_page_param
+    )
 
     render_success(
       message: "Servicios cargados exitosamente",
@@ -86,8 +91,4 @@ class ServicesController < ApplicationController
   def photos_params
     params.permit(data: [])
   end
-
-  # def pagination_params
-  #   params.permit(:page, :per_page)
-  # end
 end
