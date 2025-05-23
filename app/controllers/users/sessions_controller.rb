@@ -16,7 +16,14 @@ class Users::SessionsController < Devise::SessionsController
     #         { status: { code: 200, message: 'Logged in successfully' },
     #           data: { user: UserSerializer.new(current_user).serializable_hash[:data][:attributes] } },
     #        status: :ok
-    render json: UserSessionBlueprint.render_as_hash(@user_session, view: :login), status: :ok
+    
+    # render json: UserSessionBlueprint.render_as_hash(@user_session, view: :login), status: :ok
+    render_success(
+      message: I18n.t('users.sessions.login_success'),
+      data: {
+        user: UserSessionBlueprint.render_as_hash(@user_session, view: :login)
+      }
+    )
   end
 
   def respond_to_on_destroy
@@ -28,12 +35,12 @@ class Users::SessionsController < Devise::SessionsController
 
     if current_user
       render_success(
-        message: "Desloggeado correctamente",
+        message: I18n.t('users.sessions.logout_success'),
         code: :ok,
       )
     else
       render_error(
-        message: "No puede encontrar la sesión",
+        message: I18n.t('users.sessions.session_not_found'),
         code: :unauthorized
       )
     end
@@ -41,7 +48,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def expired_signature
     render_error(
-      message: "Token expirado",
+      message: I18n.t('users.sessions.token_expired'),
       code: :unauthorized
     )
   end
