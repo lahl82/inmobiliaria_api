@@ -1,0 +1,126 @@
+es:
+  activerecord:
+    errors:
+      models:
+        # Puedes agregar traducciones específicas por modelo aquí, si deseas.
+        # Por ejemplo:
+        # user:
+        #   attributes:
+        #     email:
+        #       blank: "debe estar presente"
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: "debe ser aceptado"
+      blank: "no puede estar en blanco"
+      confirmation: "no coincide con la confirmación"
+      empty: "no puede estar vacío"
+      equal_to: "debe ser igual a %{count}"
+      even: "debe ser un número par"
+      exclusion: "está reservado"
+      greater_than: "debe ser mayor que %{count}"
+      greater_than_or_equal_to: "debe ser mayor o igual que %{count}"
+      inclusion: "no está incluido en la lista"
+      invalid: "no es válido"
+      less_than: "debe ser menor que %{count}"
+      less_than_or_equal_to: "debe ser menor o igual que %{count}"
+      model_invalid: "La validación falló: %{errors}"
+      not_a_number: "no es un número"
+      not_an_integer: "debe ser un número entero"
+      odd: "debe ser un número impar"
+      other_than: "debe ser distinto de %{count}"
+      present: "debe estar en blanco"
+      required: "es obligatorio"
+      taken: "ya ha sido tomado"
+      too_long:
+        one: "es demasiado largo (1 carácter máximo)"
+        other: "es demasiado largo (%{count} caracteres máximo)"
+      too_short:
+        one: "es demasiado corto (1 carácter mínimo)"
+        other: "es demasiado corto (%{count} caracteres mínimo)"
+      wrong_length:
+        one: "tiene longitud incorrecta (debe tener 1 carácter)"
+        other: "tiene longitud incorrecta (debe tener %{count} caracteres)"
+  helpers:
+    select:
+      prompt: "Por favor selecciona"
+    submit:
+      create: "Crear %{model}"
+      update: "Actualizar %{model}"
+      submit: "Guardar %{model}"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d de %b"
+      long: "%d de %B de %Y"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%d de %b %H:%M"
+      long: "%d de %B de %Y %H:%M"
+  datetime:
+    distance_in_words:
+      half_a_minute: "medio minuto"
+      less_than_x_seconds:
+        one: "menos de 1 segundo"
+        other: "menos de %{count} segundos"
+      x_seconds:
+        one: "1 segundo"
+        other: "%{count} segundos"
+      less_than_x_minutes:
+        one: "menos de un minuto"
+        other: "menos de %{count} minutos"
+      x_minutes:
+        one: "1 minuto"
+        other: "%{count} minutos"
+      about_x_hours:
+        one: "alrededor de 1 hora"
+        other: "alrededor de %{count} horas"
+      x_days:
+        one: "1 día"
+        other: "%{count} días"
+      about_x_months:
+        one: "alrededor de 1 mes"
+        other: "alrededor de %{count} meses"
+      x_months:
+        one: "1 mes"
+        other: "%{count} meses"
+      about_x_years:
+        one: "alrededor de 1 año"
+        other: "alrededor de %{count} años"
+      over_x_years:
+        one: "más de 1 año"
+        other: "más de %{count} años"
+      almost_x_years:
+        one: "casi 1 año"
+        other: "casi %{count} años"
+  number:
+    format:
+      separator: ","
+      delimiter: "."
+      precision: 2
+    currency:
+      format:
+        format: "%n %u"
+        unit: "$"
+        separator: ","
+        delimiter: "."
+        precision: 2
+    percentage:
+      format:
+        delimiter: ""
+        precision: 2
+    precision:
+      format:
+        delimiter: ""
+    human:
+      format:
+        delimiter: ""
+      storage_units:
+        format: "%n %u"
+        units:
+          byte: "Byte"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
