@@ -20,7 +20,7 @@ module CollectionPaginator
             records: paginated,
             pagination: {
                 current_page: paginated.current_page,
-                total_pages: paginated.total_pages,
+                total_pages: [paginated.total_pages, 1].max,
                 per_page: paginated.limit_value,
                 total_count: paginated.total_count
             }
