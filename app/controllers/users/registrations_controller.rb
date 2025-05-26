@@ -46,8 +46,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def respond_with(current_user, _opts = {})
     if resource.persisted?
-      @user_session = current_user
-      render json: UserSessionBlueprint.render_as_hash(@user_session, view: :default), status: :created
+      render_success(
+        message: "Usuario registrado exitosamente",
+        data: {
+          user: UserSessionBlueprint.render_as_hash(current_user, view: :default)
+        },
+        code: :created
+      )
     else
       render_error(
         message: "No se pudo registrar el usuario",
