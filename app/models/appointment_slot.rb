@@ -7,6 +7,9 @@ class AppointmentSlot < ApplicationRecord
   belongs_to :user
   has_many :appointments
 
+  has_many :appointment_slot_services
+  has_many :services, through: :appointment_slot_services
+
   validates :starting, presence: true
   validate :starting_should_be_future
 

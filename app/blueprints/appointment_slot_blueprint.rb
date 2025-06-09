@@ -4,6 +4,9 @@ class AppointmentSlotBlueprint < Blueprinter::Base
 
   view :default do
     fields :starting, :duration, :max_requests, :state, :user_id
+    field :service_ids do |slot|
+      slot.service_ids
+    end
   end
 
   view :admin do

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
                        sessions: 'users/sessions',
                        registrations: 'users/registrations'
                      }
-  resources :appointment_slots, only: [:index] do
+  resources :appointment_slots, only: [:index, :show, :create] do
     collection do
       get :mine
     end
