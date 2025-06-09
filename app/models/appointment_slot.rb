@@ -4,7 +4,7 @@
 class AppointmentSlot < ApplicationRecord
   include AASM
 
-  belongs_to :service
+  belongs_to :user
   has_many :appointments
 
   validates :starting, presence: true

@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   has_many :customer_requests, class_name: "Request", foreign_key: "user_id"
   has_many :seller_services, class_name: "Service", foreign_key: "user_id"
+  has_many :appointment_slots
   has_many :questions
   has_many :ratings
 

@@ -6,6 +6,7 @@ class Appointment < ApplicationRecord
 
   belongs_to :customer, class_name: "User", foreign_key: "user_id"
   belongs_to :appointment_slot
+  belongs_to :service
 
   has_many :ratings
   has_many :notifications

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_04_165005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "appointment_slot_services", force: :cascade do |t|
+    t.bigint "appointment_slot_id", null: false
+    t.bigint "service_id", null: false
+    t.string "state"
+    t.datetime "state_changed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appointment_slot_id", "service_id"], name: "idx_on_appointment_slot_id_service_id_6e2f9f26ca", unique: true
+    t.index ["appointment_slot_id"], name: "index_appointment_slot_services_on_appointment_slot_id"
+    t.index ["service_id"], name: "index_appointment_slot_services_on_service_id"
+  end
+
   create_table "appointment_slots", force: :cascade do |t|
     t.datetime "starting", null: false
     t.integer "duration", null: false
@@ -50,8 +62,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
     t.datetime "state_changed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "service_id", null: false
-    t.index ["service_id"], name: "index_appointment_slots_on_service_id"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_appointment_slots_on_user_id"
   end
 
   create_table "appointments", force: :cascade do |t|
@@ -59,7 +71,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
     t.datetime "state_changed_at"
     t.bigint "appointment_slot_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "service_id", null: false
     t.index ["appointment_slot_id"], name: "index_appointments_on_appointment_slot_id"
+    t.index ["service_id"], name: "index_appointments_on_service_id"
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end
 
@@ -147,8 +161,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_149849) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "appointment_slots", "services"
+  add_foreign_key "appointment_slot_services", "appointment_slots"
+  add_foreign_key "appointment_slot_services", "services"
+  add_foreign_key "appointment_slots", "users"
   add_foreign_key "appointments", "appointment_slots"
+  add_foreign_key "appointments", "services"
   add_foreign_key "appointments", "users"
   add_foreign_key "notifications", "appointments"
   add_foreign_key "questions", "services"
