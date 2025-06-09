@@ -12,12 +12,26 @@ Rails.application.routes.draw do
                        sessions: 'users/sessions',
                        registrations: 'users/registrations'
                      }
-
-  resources :services
+  resources :appointment_slots, only: [:index] do
+    collection do
+      get :mine
+    end
+    member do
+      patch :update_services
+    end
+  end
+  resources :services do
+    collection do
+      get :mine
+      get :basic_mine
+    end
+  end
   resources :service_types
   resources :users do
     member do
-      get :services
+      get :services # paginado, con fotos
+      get :basic_services # sin fotos, todos
+      get :appointment_slots
     end
   end
 end

@@ -21,9 +21,9 @@ class ServicesController < ApplicationController
     )
 
     render_success(
-      message: "Servicios cargados exitosamente",
+      message: "Servicios con foto principal del usuario actual cargados exitosamente",
       data: {
-        services: ServiceBlueprint.render_as_hash(result[:records]),
+        services: ServiceBlueprint.render_as_hash(result[:records], view: :with_main_photo),
         pagination: result[:pagination]
       }
     )
@@ -34,7 +34,7 @@ class ServicesController < ApplicationController
     service = Service.find(params[:id])
 
     render_success(
-      message: "Servicio cargado exitosamente",
+      message: "Servicio con todas las fotos cargado exitosamente",
       data: ServiceBlueprint.render_as_hash(service, view: :detailed)
     )
   end
@@ -58,6 +58,34 @@ class ServicesController < ApplicationController
         details: service.errors.full_messages
       )
     end
+  end
+
+  def mine
+    result = paginate_collection(
+      current_user.seller_services,
+      order_by: :price,
+      search_column: :title,
+      search_value: search_value_param,
+      page: page_param,
+      per_page: per_page_param
+    )
+
+    render_success(
+      message: "Servicios con foto principal del usuario actual cargados exitosamente",
+      data: {
+        services: ServiceBlueprint.render_as_hash(result[:records], view: :with_main_photo),
+        pagination: result[:pagination]
+      }
+    )
+  end
+
+  def basic_mine
+    services = current_user.seller_services
+
+    render_success(
+      message: "Servicios básicos del usuario actual cargados exitosamente",
+      data: ServiceBlueprint.render_as_hash(services, view: :default)
+    )
   end
 
   # rubocop: disable Metrics/AbcSize
