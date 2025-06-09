@@ -8,6 +8,8 @@ es:
         #   attributes:
         #     email:
         #       blank: "debe estar presente"
+      messages:
+        record_invalid: "La validación falló: %{errors}"
   errors:
     format: "%{attribute} %{message}"
     messages:
