@@ -9,9 +9,8 @@ module ApiResponseHandler
 
   def render_success(message:, code: :ok, data: nil)
     http_code = Rack::Utils::SYMBOL_TO_STATUS_CODE[code] || code
-    payload = { message:, code: http_code }
-    payload[:data] = data if data.present?
-
+    payload = { message:, code: http_code, data: data }
+    
     render json: SuccessBlueprint.render_as_hash(payload), status: http_code
   end
 end
