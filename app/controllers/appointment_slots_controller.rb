@@ -43,6 +43,24 @@ class AppointmentSlotsController < ApplicationController
         end
     end
 
+    def update
+        slot = current_user.appointment_slots.find(params[:id])
+
+        if slot.update(appointment_slot_params)
+            render_success(
+            message: "Slot actualizado exitosamente",
+            data: AppointmentSlotBlueprint.render_as_hash(slot, view: :default),
+            code: :ok
+            )
+        else
+            render_error(
+            message: "Error al actualizar el slot",
+            code: :unprocessable_entity,
+            details: slot.errors.full_messages
+            )
+        end
+    end
+
     def suspend
         slot = current_user.appointment_slots.find(params[:id])
         if slot.may_suspend? && slot.suspend!
