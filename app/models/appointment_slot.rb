@@ -6,11 +6,10 @@ class AppointmentSlot < ApplicationRecord
 
   belongs_to :user
   has_many :appointments
-
   has_many :appointment_slot_services
   has_many :services, through: :appointment_slot_services
 
-  validates :starting, presence: true
+  validates :starting, :duration, :max_requests, presence: true
   validate :starting_should_be_future
 
   aasm column: :state, no_direct_assignment: true, timestamps: true do

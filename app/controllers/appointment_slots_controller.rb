@@ -43,6 +43,57 @@ class AppointmentSlotsController < ApplicationController
         end
     end
 
+    def suspend
+        slot = current_user.appointment_slots.find(params[:id])
+        if slot.may_suspend? && slot.suspend!
+            render_success(
+            message: "Slot suspendido exitosamente",
+            code: :ok,
+            data: AppointmentSlotBlueprint.render_as_hash(slot, view: :default)
+            )
+        else
+            render_error(
+            message: "Error al suspender el slot",
+            code: :unprocessable_entity,
+            details: slot.errors.full_messages
+            )
+        end
+    end
+
+    def resume
+        slot = current_user.appointment_slots.find(params[:id])
+        if slot.may_resume? && slot.resume!
+            render_success(
+            message: "Slot reanudado exitosamente",
+            code: :ok,
+            data: AppointmentSlotBlueprint.render_as_hash(slot, view: :default)
+            )
+        else
+            render_error(
+            message: "Error al reanudar el slot",
+            code: :unprocessable_entity,
+            details: slot.errors.full_messages
+            )
+        end
+    end
+
+    def destroy
+        slot = current_user.appointment_slots.find(params[:id])
+        if slot.destroy
+            render_success(
+            message: "Slot eliminado exitosamente",
+            code: :ok,
+            data: nil
+            )
+        else
+            render_error(
+            message: "Error al eliminar el slot",
+            code: :unprocessable_entity,
+            details: slot.errors.full_messages
+            )
+        end
+    end
+
     def update_services
         slot = current_user.appointment_slots.find(params[:id])
         slot.service_ids = params[:service_ids]
@@ -53,7 +104,7 @@ class AppointmentSlotsController < ApplicationController
             data: AppointmentSlotBlueprint.render_as_hash(slot, view: :default)
         )
     end
-
+   
     private
 
     # Permitir solo los parámetros permitidos

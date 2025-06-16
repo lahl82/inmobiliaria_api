@@ -12,11 +12,13 @@ Rails.application.routes.draw do
                        sessions: 'users/sessions',
                        registrations: 'users/registrations'
                      }
-  resources :appointment_slots, only: [:index, :show, :create] do
+  resources :appointment_slots, only: [:index, :show, :create, :destroy] do
     collection do
       get :mine
     end
     member do
+      patch :suspend
+      patch :resume
       patch :update_services
     end
   end
