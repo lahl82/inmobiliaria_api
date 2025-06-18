@@ -10,13 +10,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  has_many :customer_requests, class_name: "Request", foreign_key: "user_id"
-  has_many :seller_services, class_name: "Service", foreign_key: "user_id"
-  has_many :appointment_slots
+  belongs_to :company, optional: true
+
+  has_many :appointments
   has_many :questions
   has_many :ratings
 
-  ROLES = %i[admin seller customer]
+  ROLES = %i[root support admin assistant customer]
 
   NAME_REGEX = /\A([[[:alpha:]]-' ])*\z/
   PHONE_REGEX = /\A(((\(\d+\))|(\+))?([\d\-[[:space:]]]))+\z/

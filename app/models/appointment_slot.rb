@@ -4,7 +4,8 @@
 class AppointmentSlot < ApplicationRecord
   include AASM
 
-  belongs_to :user
+  belongs_to :company
+  
   has_many :appointments
   has_many :appointment_slot_services
   has_many :services, through: :appointment_slot_services

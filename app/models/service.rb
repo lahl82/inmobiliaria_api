@@ -5,10 +5,10 @@ class Service < ApplicationRecord
   include AASM
   include ActiveStorageSupport::SupportForBase64
 
-  belongs_to :seller, class_name: "User", foreign_key: "user_id"
+  belongs_to :company
   belongs_to :service_type
 
-  has_many :appointment_slots
+  has_many :appointment_slot_services
   has_many :questions
   
   has_many_base64_attached :photos

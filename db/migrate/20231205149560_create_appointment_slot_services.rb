@@ -7,6 +7,9 @@ class CreateAppointmentSlotServices < ActiveRecord::Migration[7.1]
       t.datetime :state_changed_at
 
       t.timestamps
+
+      t.references :service, null: false, foreign_key: true
+      t.references :appointment_slot, null: false, foreign_key: true
     end
 
     add_index :appointment_slot_services, [:appointment_slot_id, :service_id], unique: true

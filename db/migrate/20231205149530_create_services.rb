@@ -13,7 +13,7 @@ class CreateServices < ActiveRecord::Migration[7.0]
       t.timestamps
 
       t.references :service_type, null: false, foreign_key: true
-      t.references :user, null: false, foreign_key: true
+      t.references :company, null: false, foreign_key: true
     end
   end
 end

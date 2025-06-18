@@ -12,7 +12,7 @@ class CreateAppointmentSlots < ActiveRecord::Migration[7.0]
 
       t.timestamps
 
-      t.references :service, null: false, foreign_key: true
+      t.references :company, null: false, foreign_key: true
     end
   end
 end

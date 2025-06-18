@@ -37,16 +37,21 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :state
       t.string :name, null: false
       t.string :last_name, null: false
+      t.string :document_type, null: false
+      t.string :dni, null: false
       t.text :address, null: false
       t.string :phone, null: false
       t.string :avatar
       t.datetime :state_changed_at
 
       t.timestamps null: false
+
+      t.references :company, foreign_key: true, null: true
     end
 
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
+    add_index :users, :dni, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end
