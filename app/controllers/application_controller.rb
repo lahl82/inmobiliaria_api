@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
   def handle_internal_error(exception)
     Rails.logger.error("[INTERNAL ERROR] #{exception.class}: #{exception.message}\n#{exception.backtrace&.take(10)&.join("\n")}")
     render_error(
-      message: "Ha ocurrido un error inesperado.",
+      message: "Ha ocurrido un error inesperado:",
       code: :internal_server_error,
       details: [exception.message]
     )

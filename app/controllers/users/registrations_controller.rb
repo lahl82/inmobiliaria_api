@@ -42,8 +42,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  private
+  def create
+    build_resource(user_params)
 
+    assign_roles_and_company(resource)
+
+    resource.save
+    yield resource if block_given?
+    respond_with(resource)
+  end
+
+  private
+ 
   def respond_with(current_user, _opts = {})
     if resource.persisted?
       render_success(
@@ -72,15 +82,47 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #     errors: current_user.errors
     #   }, status: :unprocessable_entity
     # end
-
-
   end
+
+  def assign_roles_and_company(user)
+    wants_to_offer_services = ActiveModel::Type::Boolean.new.cast(raw_params[:wants_to_offer_services])
+    business_name = raw_params[:business_name]
+
+    if wants_to_offer_services
+      company_name = business_name.presence || "#{user.name} #{user.last_name}"
+      company = Company.new(name: company_name)
+
+      if company.save
+        user.company = company
+        user.roles = [:admin]
+      else
+        user.errors.add(:company, company.errors.full_messages.join(', '))
+      end
+    else
+      user.roles = [:customer]
+    end
+  end
+
 
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [%i[name second_name address phone document_type dni email]])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
+      :name, :last_name, :address, :phone, :document_type, :dni,
+      :email, :password, :wants_to_offer_services, :business_name
+    ])
+  end
+
+  def raw_params
+    @raw_params ||= params.require(:user).permit(
+      :name, :last_name, :address, :phone, :document_type, :dni,
+      :email, :password, :wants_to_offer_services, :business_name
+    )
+  end
+
+  def user_params
+    raw_params.except(:wants_to_offer_services, :business_name)
   end
 
   # If you have extra params to permit, append them to the sanitizer.
