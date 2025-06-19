@@ -25,6 +25,7 @@ class User < ApplicationRecord
   validates :name, format: { with: NAME_REGEX }, length: { minimum: 2, maximum: 50 }
   validates :last_name, format: { with: NAME_REGEX }, length: { minimum: 2, maximum: 50 }
   validates :phone, format: { with: PHONE_REGEX }, length: { minimum: 11, maximum: 20 }
+  validates :company, presence: true, if: -> { has_any_role?(:admin, :assistant) }
 
   after_initialize :assign_default_role, if: :new_record?
 
@@ -45,39 +46,59 @@ class User < ApplicationRecord
     end
   end
 
-  # Scope: User.with_role(:seller)
+  # Scope que permite buscar usuarios con un rol específico
+  # Ejemplo: User.with_role(:admin)
   scope :with_role, ->(role) {
     where("role_mask & ? != 0", 2**ROLES.index(role))
   }
 
+  # Asigna el rol :customer por defecto al crear un nuevo usuario
+  # Se ejecuta automáticamente en new_record?
   def assign_default_role
     add_role(:customer)
   end
 
-  # Setter: user.roles = [:seller, :customer]
+  # Setter para asignar múltiples roles a un usuario
+  # Ejemplo: user.roles = [:admin, :support]
   def roles=(roles)
     self.role_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
   end
 
-  # Getter: user.roles => [:seller, :customer]
+  # Getter que devuelve un arreglo de roles activos para el usuario
+  # Ejemplo: user.roles => [:admin, :support]
   def roles
     ROLES.reject do |r|
       ((role_mask || 0) & 2**ROLES.index(r)).zero?
     end
   end
 
-  # Check single role: user.has_role?(:seller)
+  # Genera métodos dinámicos como admin?, support?, customer?, etc.
+  # Ejemplo: user.admin? => true/false
+  ROLES.each do |role|
+    define_method("#{role}?") { has_role?(role) }
+  end
+
+  # Verifica si el usuario tiene un rol específico
+  # Ejemplo: user.has_role?(:admin) => true/false
   def has_role?(role)
     roles.include?(role)
   end
 
-  # Add a role: user.add_role(:seller)
+  # Verifica si el usuario tiene al menos uno de varios roles
+  # Ejemplo: user.has_any_role?(:admin, :support) => true/false
+  def has_any_role?(*roles)
+    roles.any? { |r| has_role?(r) }
+  end
+
+  # Agrega un rol al usuario si aún no lo tiene
+  # Ejemplo: user.add_role(:support)
   def add_role(role)
     return if has_role?(role)
     self.role_mask = (role_mask || 0) + 2**ROLES.index(role)
   end
 
-  # Remove a role: user.remove_role(:customer)
+  # Elimina un rol del usuario si lo tiene
+  # Ejemplo: user.remove_role(:customer)
   def remove_role(role)
     return unless has_role?(role)
     self.role_mask = role_mask - 2**ROLES.index(role)
