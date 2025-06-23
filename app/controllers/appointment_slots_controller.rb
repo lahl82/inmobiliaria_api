@@ -6,7 +6,7 @@ class AppointmentSlotsController < ApplicationController
     # before_action :authenticate_user!
 
     def index
-        slots = current_user.appointment_slots.order(:starting)
+        slots = current_user.company.appointment_slots.order(:starting)
         render_success(
             message: "Turnos del usuario actual cargados exitosamente",
             code: :ok,
@@ -14,8 +14,33 @@ class AppointmentSlotsController < ApplicationController
         )
     end
 
+    def for_month
+        year = params[:year].to_i
+        month = params[:month].to_i
+
+        if year <= 0 || month < 1 || month > 12
+            return render_error(
+            message: 'Parámetros de año o mes inválidos',
+            code: :bad_request
+            )
+        end
+
+        start_date = Date.new(year, month, 1)
+        end_date = start_date.end_of_month
+
+        slots = current_user.company.appointment_slots
+                .where(starting: start_date.beginning_of_day..end_date.end_of_day)
+                .order(:starting)
+
+        render_success(
+            message: "Turnos cargados para el mes #{month}/#{year}",
+            code: :ok,
+            data: AppointmentSlotBlueprint.render_as_hash(slots, view: :default)
+        )
+    end
+
     def show
-        slot = current_user.appointment_slots.find(params[:id])
+        slot = current_user.company.appointment_slots.find(params[:id])
 
         render_success(
             message: "Slot cargado exitosamente",
@@ -26,7 +51,7 @@ class AppointmentSlotsController < ApplicationController
 
     def create
         slot = AppointmentSlot.new(appointment_slot_params)
-        slot.user = current_user
+        slot.company = current_user.company
 
         if slot.save
             render_success(
@@ -44,7 +69,7 @@ class AppointmentSlotsController < ApplicationController
     end
 
     def update
-        slot = current_user.appointment_slots.find(params[:id])
+        slot = current_user.company.appointment_slots.find(params[:id])
 
         if slot.update(appointment_slot_params)
             render_success(
@@ -62,7 +87,7 @@ class AppointmentSlotsController < ApplicationController
     end
 
     def suspend
-        slot = current_user.appointment_slots.find(params[:id])
+        slot = current_user.company.appointment_slots.find(params[:id])
         if slot.may_suspend? && slot.suspend!
             render_success(
             message: "Slot suspendido exitosamente",
@@ -79,7 +104,7 @@ class AppointmentSlotsController < ApplicationController
     end
 
     def resume
-        slot = current_user.appointment_slots.find(params[:id])
+        slot = current_user.company.appointment_slots.find(params[:id])
         if slot.may_resume? && slot.resume!
             render_success(
             message: "Slot reanudado exitosamente",
@@ -96,7 +121,7 @@ class AppointmentSlotsController < ApplicationController
     end
 
     def destroy
-        slot = current_user.appointment_slots.find(params[:id])
+        slot = current_user.company.appointment_slots.find(params[:id])
         if slot.destroy
             render_success(
             message: "Slot eliminado exitosamente",
@@ -113,7 +138,7 @@ class AppointmentSlotsController < ApplicationController
     end
 
     def update_services
-        slot = current_user.appointment_slots.find(params[:id])
+        slot = current_user.company.appointment_slots.find(params[:id])
         slot.service_ids = params[:service_ids]
 
         render_success(

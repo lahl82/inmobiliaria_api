@@ -40,7 +40,7 @@ class ServicesController < ApplicationController
   end
 
   def create
-    service = Service.new(service_params)
+    service = current_user.company.services.new(service_params)
     # authorize services
 
     if service.save
@@ -62,7 +62,7 @@ class ServicesController < ApplicationController
 
   def mine
     result = paginate_collection(
-      current_user.seller_services,
+      current_user.company.services,
       order_by: :price,
       search_column: :title,
       search_value: search_value_param,
@@ -80,7 +80,7 @@ class ServicesController < ApplicationController
   end
 
   def basic_mine
-    services = current_user.seller_services
+    services = current_user.company.services
 
     render_success(
       message: "Servicios básicos del usuario actual cargados exitosamente",
@@ -113,7 +113,7 @@ class ServicesController < ApplicationController
   end
 
   def service_params
-    params.permit(:title, :description, :price, :service_type_id, :user_id)
+    params.permit(:title, :description, :price, :service_type_id)
   end
 
   def photos_params

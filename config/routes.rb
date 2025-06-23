@@ -14,7 +14,7 @@ Rails.application.routes.draw do
                      }
   resources :appointment_slots, only: [:index, :show, :create, :update, :destroy] do
     collection do
-      get :mine
+      get 'for_month/:year/:month', action: :for_month
     end
     member do
       patch :suspend

@@ -13,6 +13,6 @@ class UserSessionBlueprint < Blueprinter::Base
     include_view :default
 
     fields :name, :last_name
-    # Puedes incluir más si los usas luego (ej: phone, avatar, etc.)
+    association :company, blueprint: CompanyBlueprint, view: :minimal
   end
 end

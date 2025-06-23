@@ -4,7 +4,7 @@ class ServiceBlueprint < Blueprinter::Base
 
   # Vista por defecto (básica, sin fotos)
   view :default do
-    fields :title, :description, :price, :service_type_id, :user_id, :state
+    fields :title, :description, :price, :service_type_id, :company_id, :state
 
     field :service_type do |service, _opts|
       service.service_type.name
