@@ -29,7 +29,13 @@ class AppointmentSlot < ApplicationRecord
   private
 
   def starting_should_be_future
-    return if starting.present? && starting > Time.zone.now && starting < 30.days.from_now
-    errors.add(:starting, 'should be within the next 30 days')
+    return if starting.blank?
+
+    now = Time.zone.now
+    if starting <= now
+      errors.add(:starting, :not_in_future)
+    elsif starting > now + 30.days
+      errors.add(:starting, :too_far_in_future)
+    end
   end
 end
