@@ -1,0 +1,8 @@
+---
+en:
+  users:
+    sessions:
+      login_success: Login successful
+      logout_success: Logged out successfully
+      session_not_found: Session not found
+      token_expired: Your session has expired

@@ -1,7 +1,8 @@
+---
 es:
   users:
     sessions:
-      login_success: "Inicio de sesión exitoso"
-      logout_success: "Sesión cerrada correctamente"
-      token_expired: "El token ha expirado"
-      session_not_found: "No se pudo encontrar la sesión"
+      login_success: Inicio de sesión exitoso
+      logout_success: Sesión cerrada correctamente
+      session_not_found: No se pudo encontrar la sesión
+      token_expired: El token ha expirado

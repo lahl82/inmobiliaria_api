@@ -1,0 +1,10 @@
+---
+es:
+  activerecord:
+    errors:
+      models:
+        appointment_slot:
+          attributes:
+            starting:
+              not_in_future: debe estar en el futuro
+              too_far_in_future: debe ser dentro de los próximos 30 días

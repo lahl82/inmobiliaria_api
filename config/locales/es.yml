@@ -1,13 +1,6 @@
 es:
   activerecord:
     errors:
-      models:
-        # Puedes agregar traducciones específicas por modelo aquí, si deseas.
-        # Por ejemplo:
-        # user:
-        #   attributes:
-        #     email:
-        #       blank: "debe estar presente"
       messages:
         record_invalid: "La validación falló: %{errors}"
   errors:
