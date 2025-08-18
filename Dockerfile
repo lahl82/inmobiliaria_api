@@ -25,10 +25,6 @@ RUN bundle _2.5.6_ install
 # Copia el resto de la aplicación
 COPY . .
 
-# Copia las credenciales y la clave maestra
-COPY config/credentials /app/config/credentials
-COPY config/master.key /app/config/master.key
-
 # Ejecuta las migraciones de la base de datos y luego inicia el servidor
 # CMD ["wait-for-it.sh", "db:5432", "--", "sh", "-c", "bundle exec rails db:migrate && bundle exec rails server -b 0.0.0>
 

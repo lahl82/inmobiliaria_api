@@ -93,6 +93,6 @@ production:
   database: inmobiliaria_api_production
   username: <%= Rails.application.credentials.config[:db][:username] %>
   password: <%= Rails.application.credentials.config[:db][:password] %>
-  host: localhost
+  host: <%= ENV.fetch("DB_HOST", "db-host") %>
 
   # host: db-host  # nombre de host para usar con docker
