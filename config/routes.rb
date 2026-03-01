@@ -27,7 +27,11 @@ Rails.application.routes.draw do
       get :mine
       get :basic_mine
     end
+    member do
+      get :appointment_slots
+    end
   end
+  resources :appointments, only: [:index, :create]
   resources :service_types
   resources :users do
     member do

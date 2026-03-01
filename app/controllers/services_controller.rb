@@ -61,6 +61,8 @@ class ServicesController < ApplicationController
   end
 
   def mine
+    return render_error(message: "El usuario no tiene empresa asociada", code: :unprocessable_entity) unless current_user.company
+
     result = paginate_collection(
       current_user.company.services,
       order_by: :price,
@@ -80,11 +82,39 @@ class ServicesController < ApplicationController
   end
 
   def basic_mine
+    return render_error(message: "El usuario no tiene empresa asociada", code: :unprocessable_entity) unless current_user.company
+
     services = current_user.company.services
 
     render_success(
       message: "Servicios básicos del usuario actual cargados exitosamente",
       data: ServiceBlueprint.render_as_hash(services, view: :default)
+    )
+  end
+
+  def appointment_slots
+    service = Service.find(params[:id])
+
+    slots = AppointmentSlot
+      .joins(:appointment_slot_services)
+      .where(appointment_slot_services: { service_id: service.id })
+      .where(state: :active)
+      .where('appointment_slots.starting > ?', Time.zone.now)
+      .order('appointment_slots.starting')
+
+    data = slots.map do |slot|
+      current_requests = Appointment
+        .joins(:appointment_slot_service)
+        .where(appointment_slot_services: { appointment_slot_id: slot.id })
+        .where(state: :active)
+        .count
+
+      AppointmentSlotBlueprint.render_as_hash(slot, view: :default).merge(current_requests:)
+    end
+
+    render_success(
+      message: "Turnos disponibles para el servicio cargados exitosamente",
+      data:
     )
   end
 
