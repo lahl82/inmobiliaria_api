@@ -31,7 +31,11 @@ Rails.application.routes.draw do
       get :appointment_slots
     end
   end
-  resources :appointments, only: [:index, :create]
+  resources :appointments, only: [:index, :create] do
+    member do
+      patch :cancel
+    end
+  end
   resources :service_types
   resources :users do
     member do

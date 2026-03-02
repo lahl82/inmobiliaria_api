@@ -44,25 +44,29 @@ class AppointmentsController < ApplicationController
       )
     end
 
-    current_requests = Appointment
-      .joins(:appointment_slot_service)
-      .where(appointment_slot_services: { appointment_slot_id: slot.id })
-      .where(state: :active)
-      .count
+    appointment = nil
 
-    if current_requests >= slot.max_requests
-      return render_error(
-        message: "El turno ya no tiene cupo disponible",
-        code: :unprocessable_entity
-      )
+    ActiveRecord::Base.transaction do
+      slot.with_lock do
+        current_requests = Appointment
+          .joins(:appointment_slot_service)
+          .where(appointment_slot_services: { appointment_slot_id: slot.id })
+          .where(state: :active)
+          .count
+
+        if current_requests >= slot.max_requests
+          raise ActiveRecord::Rollback
+        end
+
+        appointment = Appointment.new(
+          appointment_slot_service: slot_service,
+          customer: current_user
+        )
+        appointment.save!
+      end
     end
 
-    appointment = Appointment.new(
-      appointment_slot_service: slot_service,
-      customer: current_user
-    )
-
-    if appointment.save
+    if appointment&.persisted?
       render_success(
         message: "Cita reservada exitosamente",
         code: :created,
@@ -70,7 +74,30 @@ class AppointmentsController < ApplicationController
       )
     else
       render_error(
-        message: "Error al reservar la cita",
+        message: "El turno ya no tiene cupo disponible",
+        code: :unprocessable_entity
+      )
+    end
+  end
+
+  def cancel
+    appointment = current_user.appointments.find(params[:id])
+
+    unless appointment.may_cancel_by_user?
+      return render_error(
+        message: "Esta cita no puede cancelarse",
+        code: :unprocessable_entity
+      )
+    end
+
+    if appointment.cancel_by_user!
+      render_success(
+        message: "Cita cancelada exitosamente",
+        data: AppointmentBlueprint.render_as_hash(appointment, view: :default)
+      )
+    else
+      render_error(
+        message: "Error al cancelar la cita",
         code: :unprocessable_entity,
         details: appointment.errors.full_messages
       )
