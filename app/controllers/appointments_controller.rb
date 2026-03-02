@@ -45,9 +45,22 @@ class AppointmentsController < ApplicationController
     end
 
     appointment = nil
+    error_message = nil
 
     ActiveRecord::Base.transaction do
       slot.with_lock do
+        already_booked = Appointment
+          .joins(:appointment_slot_service)
+          .where(appointment_slot_services: { appointment_slot_id: slot.id })
+          .where(user_id: current_user.id)
+          .where(state: :active)
+          .exists?
+
+        if already_booked
+          error_message = "Ya tienes una cita activa en este turno"
+          raise ActiveRecord::Rollback
+        end
+
         current_requests = Appointment
           .joins(:appointment_slot_service)
           .where(appointment_slot_services: { appointment_slot_id: slot.id })
@@ -55,6 +68,7 @@ class AppointmentsController < ApplicationController
           .count
 
         if current_requests >= slot.max_requests
+          error_message = "El turno ya no tiene cupo disponible"
           raise ActiveRecord::Rollback
         end
 
@@ -74,7 +88,7 @@ class AppointmentsController < ApplicationController
       )
     else
       render_error(
-        message: "El turno ya no tiene cupo disponible",
+        message: error_message || "Error al reservar la cita",
         code: :unprocessable_entity
       )
     end
