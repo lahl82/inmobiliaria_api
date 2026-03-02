@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :questions
   has_many :ratings
 
-  ROLES = %i[root support admin assistant customer]
+  ROLES = %i[root support seller assistant customer]
 
   NAME_REGEX = /\A([[[:alpha:]]-' ])*\z/
   PHONE_REGEX = /\A(((\(\d+\))|(\+))?([\d\-[[:space:]]]))+\z/
@@ -25,7 +25,7 @@ class User < ApplicationRecord
   validates :name, format: { with: NAME_REGEX }, length: { minimum: 2, maximum: 50 }
   validates :last_name, format: { with: NAME_REGEX }, length: { minimum: 2, maximum: 50 }
   validates :phone, format: { with: PHONE_REGEX }, length: { minimum: 11, maximum: 20 }
-  validates :company, presence: true, if: -> { has_any_role?(:admin, :assistant) }
+  validates :company, presence: true, if: -> { has_any_role?(:seller, :assistant) }
 
   after_initialize :assign_default_role, if: :new_record?
 
@@ -47,7 +47,7 @@ class User < ApplicationRecord
   end
 
   # Scope que permite buscar usuarios con un rol específico
-  # Ejemplo: User.with_role(:admin)
+  # Ejemplo: User.with_role(:seller)
   scope :with_role, ->(role) {
     where("role_mask & ? != 0", 2**ROLES.index(role))
   }
@@ -59,33 +59,33 @@ class User < ApplicationRecord
   end
 
   # Setter para asignar múltiples roles a un usuario
-  # Ejemplo: user.roles = [:admin, :support]
+  # Ejemplo: user.roles = [:seller, :support]
   def roles=(roles)
     self.role_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
   end
 
   # Getter que devuelve un arreglo de roles activos para el usuario
-  # Ejemplo: user.roles => [:admin, :support]
+  # Ejemplo: user.roles => [:seller, :support]
   def roles
     ROLES.reject do |r|
       ((role_mask || 0) & 2**ROLES.index(r)).zero?
     end
   end
 
-  # Genera métodos dinámicos como admin?, support?, customer?, etc.
-  # Ejemplo: user.admin? => true/false
+  # Genera métodos dinámicos como seller?, support?, customer?, etc.
+  # Ejemplo: user.seller? => true/false
   ROLES.each do |role|
     define_method("#{role}?") { has_role?(role) }
   end
 
   # Verifica si el usuario tiene un rol específico
-  # Ejemplo: user.has_role?(:admin) => true/false
+  # Ejemplo: user.has_role?(:seller) => true/false
   def has_role?(role)
     roles.include?(role)
   end
 
   # Verifica si el usuario tiene al menos uno de varios roles
-  # Ejemplo: user.has_any_role?(:admin, :support) => true/false
+  # Ejemplo: user.has_any_role?(:seller, :support) => true/false
   def has_any_role?(*roles)
     roles.any? { |r| has_role?(r) }
   end

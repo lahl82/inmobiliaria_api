@@ -94,7 +94,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
       if company.save
         user.company = company
-        user.roles = [:admin]
+        user.roles = [:seller]
       else
         user.errors.add(:company, company.errors.full_messages.join(', '))
       end
