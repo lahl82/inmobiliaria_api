@@ -13,7 +13,6 @@ amazon_dev:
   secret_access_key: <%= Rails.application.credentials.aws[:secret_access_key] %>
   region: <%= Rails.application.credentials.aws[:region] %>
   bucket: <%= Rails.application.credentials.aws[:bucket] %>
-  prefix: guorkers/dev 
 
 amazon_prod:
   service: S3
@@ -21,7 +20,6 @@ amazon_prod:
   secret_access_key: <%= Rails.application.credentials.aws[:secret_access_key] %>
   region: <%= Rails.application.credentials.aws[:region] %>
   bucket: <%= Rails.application.credentials.aws[:bucket] %>
-  prefix: guorkers/prod 
 # amazon:
 #   service: S3
 #   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
